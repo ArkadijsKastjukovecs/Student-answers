@@ -1,6 +1,6 @@
 package project.answers.teacher;
 
-// Teacher webpage
+// Teacher webpage 
 
 public class Teacher {
 
