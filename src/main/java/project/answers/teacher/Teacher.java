@@ -24,11 +24,42 @@ public class Teacher {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("<p> <a href='/SelectExcel'>SelectExcel</a> <button type='button'>Upload</button> </p>");
+		
+		sb.append("<p> <a href='/NewTest'>New Test upload</a></p>\n"
+				+ "<p><a href='/SelectTest'>Select Test File</a> <button type='button'>Send Test</button></p>"
+				+ "\n \n \n"
+				+ "<p><a>Current Test for students:</a>\n <a href='/getCurrentTest'></a></p>"
+				);
 		
 		return sb.toString();
-		
-		
 	}
+	
+	
+	@GetMapping("/NewTest")
+	@ResponseBody
+	public String newTestUpload(){
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<p><button action='/selectUploadFile'>Select File </button></p>"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "<form action=''>Comment: <input type='text' comment='comment' value=''>"
+				+ "<input type='submit' value='Add Comment'></form>"
+				);
+		
+		sb.append("<p><a>Correct Answers:</a></p>"
+				
+				// Correct answer 1, need href to java method
+				+ "<form action=''>Answer 1: <input type='int' Answer='answer' value=''>"
+				+ "<input type='submit' value='Add'></form>"
+				
+				// Correct answer 2, need href to java method
+				+ "<form action=''>Answer 2: <input type='int' Answer='answer' value=''>"
+				+ "<input type='submit' value='Add'></form>"
+				);
+		
+		return sb.toString();
+	}
+	
+	
 
 }
