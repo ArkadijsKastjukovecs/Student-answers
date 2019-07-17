@@ -2,7 +2,7 @@ package project.answers.student;
 
 
 public class Student {
-	private float[] trueAnswers = new float[2];
+	private String[] trueAnswers = new String[2];
 	private float[] studentAnswers;
 	private String studName;
 	private int score;
@@ -17,11 +17,11 @@ public class Student {
 		score = 0;
 	}
 	
-	public float getTrueAnswers(int place) {
+	public String getTrueAnswers(int place) {
 		return trueAnswers[place];
 	}
 	
-	public void setTrueAnswers(float trueAnswer, int place) {
+	public void setTrueAnswers(String trueAnswer, int place) {
 		//for(int i = 0; i<ammount; i++){
 			this.trueAnswers[place] = trueAnswer;
 	//	}

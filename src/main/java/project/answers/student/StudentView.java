@@ -1,5 +1,6 @@
 package project.answers.student;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/", produces = "text/html;charset=UTF-8")
 public class StudentView {
+	int score = 0;
 	StudentController studentController;
 	String hr = "<style>hr { display: block;margin-top: 0.5em;margin-bottom: 0.5em;margin-left: auto;margin-right: auto;border-style: inset;border-width: 1px;}</style>";
 	
@@ -26,12 +28,11 @@ public class StudentView {
     StringBuilder sb = new StringBuilder();
     sb.append("<p><font size = +2 >Ludzu, lejupieladejiet so failu: <a href='/excelfile'>Excel File</a></font></p>\n");
     sb.append("<hr>\n");
-   // sb.append("<p>Ievadiet, ludzu, atbildi uz pirmo jautajumu:</p>\n");
-    sb.append("<form action=/action_page.php>Ievadiet, ludzu, atbildi uz pirmo jautajumu:<br><input type=text name=answer1><br>");
- //   sb.append("<a href='/findTeacher'>");
-   // sb.append("<a href='/findTeacher'>Find teacher<a><br/>\n");
-   // sb.append("<a href='/deleteTeacher'>Delete teacher<a><br/>\n");
-    // Following is also redundant because status is OK by default:
+    sb.append("<form action='/buttonSubmit'>Ievadiet, ludzu, atbildi uz pirmo jautajumu:"
+    		+ "<br><input type=text name=answer1><br>\n"
+    		+ "Ievadiet, ludzu, atbildi uz otro jautajumu:<br><input type=text name=answer2><br>\n"
+    		+ "<button type=submit >Apstiprinat</button></form><br/>\n");
+    
     response.setStatus(HttpServletResponse.SC_OK);
     return sb.toString();
 }
@@ -39,6 +40,19 @@ public class StudentView {
     @ResponseBody
     public String downloadFile(HttpServletRequest request, HttpServletResponse response) {
 		
+		return "";
+	}
+	@GetMapping("/buttonSubmit")
+    @ResponseBody
+	public String buttonSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+		StringBuilder sb1 = new StringBuilder();
+		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "") {
+			studentController = new StudentController();
+			
+			 score = studentController.submitAnswers(studentController.getFullRowExcel(1), 
+					request.getParameter("answer1"), request.getParameter("answer2"));
+			sb1.append("<hr>");
+		}
 		return "";
 	}
 	
