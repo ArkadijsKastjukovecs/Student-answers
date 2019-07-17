@@ -29,7 +29,7 @@ public class StudentView {
     public String homePage(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
             HttpServletResponse response) {
     StringBuilder sb = new StringBuilder();
-    sb.append("<p><font size = +2 >Ludzu, lejupieladejiet so failu: <a href='/excelfile'>Excel File</a></font></p>\n");
+    sb.append("<p><font size = +2 >Ludzu, lejupieladejiet so failu: </p></font><a href='/student/excelFile' target='_blank'>  Excel File</a>\n");
     sb.append("<hr>\n");
     sb.append("<form action='/student/buttonSubmit'>Ievadiet, ludzu, atbildi uz pirmo jautajumu:"
     		+ "<br><input type=text name=answer1><br>\n"
@@ -39,23 +39,27 @@ public class StudentView {
     response.setStatus(HttpServletResponse.SC_OK);
     return sb.toString();
 }
-	@GetMapping("/excelfile")
+	@GetMapping("/excelFile")
     @ResponseBody
-    public String downloadFile(HttpServletRequest request, HttpServletResponse response) {
-		
+    public String excelFile(HttpServletRequest request, HttpServletResponse response) {
+		StringBuilder sb2 = new StringBuilder();
 		File file = Server.testController.getTest("first").getFile();
-		
-		return "";
+	//	if(file.exists()){
+	//		sb2.append("<p>New Page!</p>");
+			
+	//	}
+	//	else{
+	//		sb2.append("<p>File don't exist</p>");
+	//	}
+		sb2.append("<p>File don't exist</p>");
+		return sb2.toString();
 	}
 	@GetMapping("/buttonSubmit")
     @ResponseBody
 	public String buttonSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException{
 		StringBuilder sb1 = new StringBuilder();
 		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "") {
-		//	studentController = new StudentController();
-			
-	//		 score = studentController.submitAnswers(studentController.getFullRowExcel(1), 
-	//				request.getParameter("answer1"), request.getParameter("answer2"));
+
 			sb1.append("<hr>");
 			sb1.append("<p>Jusu atzime ir: </p>\n");
 			sb1.append(StudentController.getAnswers(request.getParameter("answer1"), request.getParameter("answer2")));
