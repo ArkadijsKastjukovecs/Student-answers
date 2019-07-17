@@ -12,7 +12,7 @@ import project.answers.tests.Test;
 public class StudentController {
 	protected Connection conn;
 	public StudentController(){
-		//gjk
+		//gjkg
 	/*	conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -61,7 +61,7 @@ public class StudentController {
 	}*/
 	public void getAnswers(){
 		Test test = Server.testController.getTest("first");
-		test.
+		
 		
 	}
 }

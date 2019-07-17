@@ -17,7 +17,7 @@ public class Server {
 	public static TestController testController;
 	public static void main(String[] args) {
 		testController = TestController.getInstance();
-		testController.addTest(new Test(null, "first", ));
+		testController.addTest(new Test(null, "first", "", 1, 1));
 		testController.loadTests();
 		SpringApplication.run(Server.class, args);
 		

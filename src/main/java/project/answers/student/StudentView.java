@@ -49,8 +49,8 @@ public class StudentView {
 		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "") {
 			studentController = new StudentController();
 			
-			 score = studentController.submitAnswers(studentController.getFullRowExcel(1), 
-					request.getParameter("answer1"), request.getParameter("answer2"));
+	//		 score = studentController.submitAnswers(studentController.getFullRowExcel(1), 
+	//				request.getParameter("answer1"), request.getParameter("answer2"));
 			sb1.append("<hr>");
 		}
 		return "";
