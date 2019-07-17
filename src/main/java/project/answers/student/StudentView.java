@@ -1,9 +1,12 @@
 package project.answers.student;
 
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -41,17 +44,27 @@ public class StudentView {
 }
 	@GetMapping("/excelFile")
     @ResponseBody
-    public String excelFile(HttpServletRequest request, HttpServletResponse response) {
+    public String excelFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		StringBuilder sb2 = new StringBuilder();
-		File file = Server.testController.getTest("first").getFile();
-	//	if(file.exists()){
-	//		sb2.append("<p>New Page!</p>");
-			
-	//	}
-	//	else{
-	//		sb2.append("<p>File don't exist</p>");
-	//	}
-		sb2.append("<p>File don't exist</p>");
+		File file = Server.testController.getTest("One").getFile();
+		if(file.exists()){
+			OutputStream out = response.getOutputStream();
+			FileInputStream in = new FileInputStream(file);
+			byte[] buffer = new byte[4096];
+			int length;
+			while ((length = in.read(buffer)) > 0){
+			    out.write(buffer, 0, length);
+			}
+			in.close();
+			out.flush();
+			sb2.append("<p>New Page!</p>");
+		//	sb2.append("<a download='"+ file +"'>");
+		}
+			  
+		else{
+			sb2.append("<p>File don't exist</p>");
+		}
+	//	sb2.append("<p>File don't exist</p>");
 		return sb2.toString();
 	}
 	@GetMapping("/buttonSubmit")
