@@ -12,7 +12,7 @@ import project.answers.tests.Test;
 public class StudentController {
 	protected Connection conn;
 	public StudentController(){
-		//gj
+		//gjg
 	/*	conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
