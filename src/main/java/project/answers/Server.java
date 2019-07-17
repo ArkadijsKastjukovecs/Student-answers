@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+
 import project.answers.tests.Test;
 import project.answers.tests.TestController;
 
@@ -16,6 +17,7 @@ import project.answers.tests.TestController;
 public class Server {
 	public static TestController testController;
 	public static void main(String[] args) {
+		Test test = new Test();
 		testController = TestController.getInstance();
 		testController.addTest(new Test(null, "first", "", 1, 1));
 		testController.loadTests();

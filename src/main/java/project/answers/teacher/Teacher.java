@@ -40,10 +40,15 @@ public class Teacher {
 	public String newTestUpload(){
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("<p><button action='/selectUploadFile'>Select File </button></p>"
-				+ "&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ "<form action=''>Comment: <input type='text' comment='comment' value=''>"
-				+ "<input type='submit' value='Add Comment'></form>"
+		sb.append("<p><form action='/NewTest/doUpload' method='post' enctype='multipart/form-data'>"
+				+ "<label>Enter file</label><input type='file' name='file'>"
+				+ "<button type='submit'>Upload</button></p>"
+				
+				+ "<p><form action=''>Test Name: <input type='text' name='name' value=''>"
+				+ "<input type='submit' value='Add Comment'></form></p>"
+				
+				+ "<p><form action=''>Comment: <input type='text' comment='comment' value=''>"
+				+ "<input type='submit' value='Add Comment'></form></p>"
 				);
 		
 		sb.append("<p><a>Correct Answers:</a></p>"
