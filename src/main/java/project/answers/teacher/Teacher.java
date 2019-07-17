@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 // Teacher webpage 
 
 @RestController
-@RequestMapping(value = "/", produces = "text/html;charset=UTF-8")
+@RequestMapping(value = "/teacher", produces = "text/html;charset=UTF-8")
 public class Teacher {
 	
 	@GetMapping("")

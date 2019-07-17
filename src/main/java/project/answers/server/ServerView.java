@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.answers.student.*;
-//import project.answers.teacher.*;
+import project.answers.teacher.*;
 
 @RestController
 @RequestMapping(value = "/index", produces = "text/html;charset=UTF-8")
 public class ServerView {
-	// Teacher teacher = new Teacher();
+	 Teacher teacher = new Teacher();
 	
 	 StudentView student = new StudentView();
 
@@ -25,7 +25,7 @@ public class ServerView {
 			HttpServletResponse response) {
 
 		StringBuilder sb = new StringBuilder();
-
+		
 		sb.append("<p> <a href='/teacher'>Teacher</a></p>\n"
 				+ "<p><a href='/student'>Student</a> ");
 

@@ -59,9 +59,16 @@ public class StudentController {
 		student.setStudName(name);
 		return student;
 	}*/
-	public void getAnswers(){
+	public static int getAnswers(String one, String two){
+		Student student = new Student();
 		Test test = Server.testController.getTest("first");
-		
+		if(Double.parseDouble(one)==test.getAnswer1()){
+			student.setScore(student.getScore()+1);
+		}
+		if(Double.parseDouble(two)==test.getAnswer2()){
+			student.setScore(student.getScore()+1);
+		}
+		return student.getScore();
 		
 	}
 }
