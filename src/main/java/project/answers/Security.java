@@ -17,9 +17,11 @@ public class Security extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home","/student").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .antMatchers("/", "/home","/student","/student/excelFile").permitAll()
+                .anyRequest()
+                .permitAll()
+//                .authenticated()
+                .and().csrf().disable()
             .formLogin()
                 .loginPage("/login")
                 .permitAll()
@@ -33,7 +35,7 @@ public class Security extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         UserDetails user =
              User.withDefaultPasswordEncoder()
-                .username("Teacher")
+                .username("user")
                 .password("password")
                 .roles("USER")
                 .build();

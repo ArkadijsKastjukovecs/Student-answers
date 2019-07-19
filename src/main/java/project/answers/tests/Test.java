@@ -16,13 +16,13 @@ public class Test implements Serializable{
 	private File file;
 	private String name;
 	private String question;
-	private double answer1;
-	private double answer2;
+	private String answer1;
+	private String answer2;
 	private double studentAnswer;
 	private List<Double> answers;
 	private List<Student> students;
 
-	public Test(File file, String name, String question, double answer1, double answer2) {
+	public Test(File file, String name, String question, String answer1, String answer2) {
 		this.file = file;
 		this.name = name;
 		this.question = question;
@@ -76,18 +76,18 @@ public class Test implements Serializable{
 	}
 
 	public double getAnswer1() {
-		return answer1;
+		return Double.parseDouble(answer1);
 	}
 
-	public void setAnswer1(double answer1) {
+	public void setAnswer1(String answer1) {
 		this.answer1 = answer1;
 	}
 
 	public double getAnswer2() {
-		return answer2;
+		return Double.parseDouble(answer2);
 	}
 
-	public void setAnswer2(double answer2) {
+	public void setAnswer2(String answer2) {
 		this.answer2 = answer2;
 	}
 	
