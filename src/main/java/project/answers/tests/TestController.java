@@ -18,7 +18,7 @@ public class TestController {
 	private static TestController instance = null;
 	private List<Test> tests;
 	private List<Student> students;
-	private Test active;
+	private Test active = null;
 
 	private TestController() {
 		tests = new ArrayList<>();
