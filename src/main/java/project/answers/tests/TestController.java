@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import project.answers.customExceptions.MultiFileNameException;
+import project.answers.customExceptions.MultiTestNameException;
 import project.answers.student.Student;
 
 public class TestController {
 
 	private static TestController instance = null;
-	public List<Test> tests;
-	public List<Student> students;
+	private List<Test> tests;
+	private List<Student> students;
 
 	private TestController() {
 		tests = new ArrayList<>();
@@ -28,6 +30,14 @@ public class TestController {
 		}
 		return instance;
 
+	}
+	
+	public List<Test> showAllTests(){
+		return tests;
+	}
+	
+	public List<Student> showAllStudents(){
+		return students;
 	}
 
 	public Test getTest(String name) {
@@ -50,7 +60,14 @@ public class TestController {
 		return student;
 	}
 
-	public void addTest(Test test) {
+	public void addTest(Test test) throws MultiFileNameException,MultiTestNameException {
+		for (Test tst: tests) {
+		if (test.getName().equalsIgnoreCase(tst.getName()))
+			throw new MultiTestNameException(tst.getName());
+		if (test.getFile().getName().equals(tst.getFile().getName()))
+			throw new MultiFileNameException(tst.getFile().getName());
+		}
+		
 		tests.add(test);
 		saveTests();
 	}
@@ -79,7 +96,7 @@ public class TestController {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MultiFileNameException, MultiTestNameException {
 		TestController tc = TestController.getInstance();
 		tc.addTest(new Test(null, "name", "question", "123", "123"));
 		tc.AddStudent(new Student("janis", "name", 2));

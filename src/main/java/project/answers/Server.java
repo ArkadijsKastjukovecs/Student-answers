@@ -13,9 +13,9 @@ public class Server {
 	public static TestController testController;
     public static void main(String[] args) {
     	testController = TestController.getInstance();
-    	for(Test tst:testController.tests)
+    	for(Test tst:testController.showAllTests())
     		System.out.println(tst);
-    	for (Student std:testController.students)
+    	for (Student std:testController.showAllStudents())
     		System.out.println(std);
         SpringApplication.run(Server.class, args);
     }
