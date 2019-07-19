@@ -45,7 +45,25 @@ public class TestController {
 	public List<Test> showAllTests() {
 		return tests;
 	}
-
+	
+	public List<Student> findStudentsByTest(Test test){
+		List<Student>studentsInTest = new ArrayList<>();
+		for (Student std:showAllStudents())
+			if (test.getName().equalsIgnoreCase(std.getFileName()))
+				studentsInTest.add(std);
+		return studentsInTest;
+	}
+	
+	public List<Student> findStudentsByTest(String test){
+		List<Student> studentInTest = new ArrayList<>();
+		for (Student std:showAllStudents())
+			if (test.equalsIgnoreCase(std.getFileName()))
+				studentInTest.add(std);
+		return studentInTest;
+				
+	}
+	
+	
 	public List<Student> showAllStudents() {
 		return students;
 	}
