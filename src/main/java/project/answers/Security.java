@@ -20,7 +20,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home","/student","/student/excelFile").permitAll()
                 .anyRequest()
                 .permitAll()
-//                .authenticated()
+//                 .authenticated()
                 .and().csrf().disable()
             .formLogin()
                 .loginPage("/login")
