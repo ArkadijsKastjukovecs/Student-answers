@@ -33,6 +33,10 @@ public class TestController {
 		return instance;
 
 	}
+	
+	public Student deleteLastStudent(){
+		return students.remove(students.size()-1);
+	}
 
 	public void SetActiveTest(Test test) {
 		active = test;
