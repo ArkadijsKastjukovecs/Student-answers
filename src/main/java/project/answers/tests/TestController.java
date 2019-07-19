@@ -110,7 +110,7 @@ public class TestController {
 		}
 	}
 
-	public static void main(String[] args) throws MultiFileNameException, MultiTestNameException {
+	public static void main(String[] args) throws MultiFileNameException, MultiTestNameException, MultiStudentNameException {
 		TestController tc = TestController.getInstance();
 		tc.addTest(new Test(null, "name", "question", "123", "123"));
 		tc.AddStudent(new Student("janis", "name", 2));
