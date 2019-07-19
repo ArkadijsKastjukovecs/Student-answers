@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>First thymeleaf page </title>
+    </head>
+    <body>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+            <form th:action="@{/do}" method="post">
+                <div><label>Label1 :<input type="text" name="text"/></label></div>
+                <div><input type="submit" value="Let's go!"/></div>
+            </form>
+    </body>
+</html>

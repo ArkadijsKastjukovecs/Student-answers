@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.answers.Server;
+import project.answers.tests.TestController;
 
 @RestController
 @RequestMapping(value = "/student", produces = "text/html;charset=UTF-8")
 public class StudentView {
+	
 	String help = "";
 	//StudentController studentController;
 	String hr = "<style>hr { display: block;margin-top: 0.5em;margin-bottom: 0.5em;margin-left: auto;margin-right: auto;border-style: inset;border-width: 1px;}</style>";
@@ -55,6 +57,7 @@ public class StudentView {
 		try{
 		//	yes.doGet(request, response);
 			System.out.println(help);
+//			File file = Server.testController.active.getFile();
 			File file = Server.testController.getTest(request.getParameter("testName")).getFile();
 			System.out.println(file.getName());
 //			response.setContentType("application/ods");

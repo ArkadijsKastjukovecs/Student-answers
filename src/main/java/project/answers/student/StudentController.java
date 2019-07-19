@@ -65,16 +65,16 @@ public class StudentController {
 		Test test = Server.testController.getTest(fileName);
 		//String passed = "";
 		
-		if(Double.parseDouble(one)==test.getAnswer1()){
-			
-			//student.setScore(student.getScore()+1);
-			localScore++;
-		}
-		if(Double.parseDouble(two)==test.getAnswer2()){
-			
-			//student.setScore(student.getScore()+1);
-			localScore++;
-		}
+//		if(Double.parseDouble(one)==test.getAnswer1()){
+//			
+//			//student.setScore(student.getScore()+1);
+//			localScore++;
+//		}
+//		if(Double.parseDouble(two)==test.getAnswer2()){
+//			
+//			//student.setScore(student.getScore()+1);
+//			localScore++;
+//		}
 		Student student = new Student(vards, fileName, localScore);
 		test.addStudent(student);
 		return student.getScore();

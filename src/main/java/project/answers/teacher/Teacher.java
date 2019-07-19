@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.answers.customExceptions.MultiTestNameException;
 import project.answers.tests.Test;
 import project.answers.tests.TestController;
 
@@ -112,6 +113,7 @@ public class Teacher {
 					OutputStream outStream = new FileOutputStream(theFile);
 					outStream.write(buffer);
 					
+					
 					Test test = new Test(theFile, request.getParameter("name"), request.getParameter("comment"),
 							request.getParameter("answer1"), request.getParameter("answer2"));
 
@@ -129,6 +131,8 @@ public class Teacher {
 					response.setStatus(HttpServletResponse.SC_OK);
 					e.printStackTrace();
 					return sb.toString();
+				} catch (MultiTestNameException e) {
+					e.printStackTrace();
 				}
 
 			} else {

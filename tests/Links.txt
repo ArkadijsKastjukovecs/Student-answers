@@ -1,0 +1,2 @@
+https://habr.com/ru/post/435144/
+https://www.thymeleaf.org/

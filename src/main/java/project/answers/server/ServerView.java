@@ -16,7 +16,7 @@ public class ServerView {
 	
 	 StudentView student = new StudentView();
 
-	@GetMapping("")
+	@GetMapping("/")
 	@ResponseBody
 	public String homePage(String name, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -27,6 +27,11 @@ public class ServerView {
 				+ "<p><a href='/student'>Student</a> ");
 
 		return sb.toString();
+	}
+	
+	@GetMapping("/do")
+	public void myMethod(){
+		
 	}
 
 }
