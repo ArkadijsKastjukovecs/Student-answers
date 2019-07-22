@@ -1,19 +1,23 @@
 package project.answers.student;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.answers.Server;
+import project.answers.customExceptions.MultiStudentNameException;
 import project.answers.tests.Test;
 
+@Controller
 public class StudentController {
-	protected Connection conn;
-	public StudentController(){
-		//gjg
-	/*	conn = null;
+	Test test = Server.testController.getTest("first");
+	
+//	protected Connection conn;
+	/*conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(
@@ -26,11 +30,11 @@ public class StudentController {
 			// System.out.println("Is connection");
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e);
-		}*/
+		}
 		
 	}
 	
-	/*public Student getFullRowExcel(int rowWithFile)throws SQLException{
+	public Student getFullRowExcel(int rowWithFile)throws SQLException{
 		String query = "select * from database_Tests.Tests1 where id = (?)";
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.setInt(1, rowWithFile);
@@ -59,25 +63,49 @@ public class StudentController {
 		student.setStudName(name);
 		return student;
 	}*/
-	public static int getAnswers(String one, String two, String fileName, String vards){
+	@RequestMapping(value = "/student", method = RequestMethod.GET)
+	public String helloWorld(HttpServletRequest request, HttpServletResponse response, Model model){
+	//	Server.testController.SetActiveTest(test);
+		String test = Server.testController.getTest("first").getName();
+	
+		
+		model.addAttribute("test", test);
+		model.addAttribute("ActiveTest", Server.testController.getActiveTest());
+		return "StudentView";
+	}
+	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
+	public void excelFile(HttpServletRequest request, HttpServletResponse response){
+		request.getParameter("test");
+	}
+	
+	public static int getAnswers(String one, String two, String fileName, String vards) throws MultiStudentNameException{
 		
 		int localScore = 0;
 		Test test = Server.testController.getTest(fileName);
 		//String passed = "";
 		
-//		if(Double.parseDouble(one)==test.getAnswer1()){
-//			
-//			//student.setScore(student.getScore()+1);
-//			localScore++;
-//		}
-//		if(Double.parseDouble(two)==test.getAnswer2()){
-//			
-//			//student.setScore(student.getScore()+1);
-//			localScore++;
-//		}
+		if(one.equals(test.getAnswer1())){
+			
+			//student.setScore(student.getScore()+1);
+			localScore++;
+		}
+		if(two.equals(test.getAnswer2())){
+			
+			//student.setScore(student.getScore()+1);
+			localScore++;
+		}
 		Student student = new Student(vards, fileName, localScore);
-		test.addStudent(student);
+		Server.testController.AddStudent(student);
 		return student.getScore();
 		
 	}
+	public static boolean activeTest(){
+		Test test = Server.testController.getActiveTest();
+		if(test==null){
+		return true;
+		}else{
+			return false;
+		}
+	}
+
 }
