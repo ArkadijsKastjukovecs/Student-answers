@@ -1,37 +1,14 @@
 package project.answers.server;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import project.answers.student.StudentView;
-
-@RestController
-@RequestMapping(value = "", produces = "text/html;charset=UTF-8")
+@Controller
 public class ServerView {
-	
-	 StudentView student = new StudentView();
 
-	@GetMapping("/")
-	@ResponseBody
-	public String homePage(String name, HttpServletRequest request,
-			HttpServletResponse response) {
-
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("<p> <a href='/Teacher'>Teacher</a></p>\n"
-				+ "<p><a href='/student'>Student</a> ");
-
-		return sb.toString();
+	@RequestMapping(value = "/Teacher2")
+	public String getTeacherPage(){
+		return "Teacher2";
 	}
 	
-	@GetMapping("/do")
-	public void myMethod(){
-		
-	}
-
 }

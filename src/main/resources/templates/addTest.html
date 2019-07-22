@@ -11,9 +11,17 @@
 	</div>
 	<div>
 		<form th:action="@{/addTest}" th:object="${Test}" method="post">
-		<p th:text="${name}"></p>
-		<label for="name" id="name" ></label>
-		<input type="text" id="name" name="name" autofocus="autofocus"/>
+		<label for="name" id="file" >Select File</label>
+		<input type="file" id="file" name="file" autofocus="autofocus"/>
+		<br>
+		<label for="name" id="name" >Name</label>
+		<input type="text" id="name" name="name"/>
+		<br>
+		<label for="answer1" id="answer1" >First correct answer</label>
+		<input type="text" id="answer1" name="answer1"/>
+		<br>
+		<label for="answer2" id="answer2" >Second correct answer</label>
+		<input type="text" id="answer2" name="answer2"/>
 		<br>
 		<input type="submit" value="Click"/></form>
 	</div>
