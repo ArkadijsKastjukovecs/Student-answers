@@ -43,6 +43,7 @@ public class TestController {
 	}
 
 	public Test getActiveTest() {
+		System.out.println(active);
 		return active;
 	}
 
@@ -73,6 +74,8 @@ public class TestController {
 	}
 
 	public Test getTest(String name) {
+		for (Test tst : tests)
+			System.out.println(tst);
 		Test test = null;
 		Iterator<Test> iterator = tests.iterator();
 		while (iterator.hasNext()) {
@@ -102,6 +105,8 @@ public class TestController {
 
 		tests.add(test);
 		saveTests();
+		for (Test tst : tests)
+			System.out.println(tst);
 	}
 
 	public void AddStudent(Student student) throws MultiStudentNameException {
