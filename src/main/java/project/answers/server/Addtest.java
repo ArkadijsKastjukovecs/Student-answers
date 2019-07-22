@@ -19,6 +19,7 @@ public class Addtest {
 	@RequestMapping(value = "/addTest", method = RequestMethod.POST)
 	public String setTest(@ModelAttribute(name="addTest") Test test, Model model){
 		System.out.println(test.getName());
+		
 		return "index";
 	}
 }
