@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Teacher</title>
+</head>
+<body>
+	<div>
+		<h1>Your opportunities</h1>
+	</div>
+	<div>
+		<form th:action="@{/addTest}" th:object="${Test}" method="post">
+		<p th:text="${name}"></p>
+		<label for="name" id="name" ></label>
+		<input type="text" id="name" name="name" autofocus="autofocus"/>
+		<br>
+		<input type="submit" value="Click"/></form>
+	</div>
+</body>
+</html>
