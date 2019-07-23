@@ -86,9 +86,9 @@ public class Teacher {
 
 						+ "<button type='submit'>Upload</button></p>"
 
-						+ "<p><form action='/testName'>Test Name: <input type='text' name='name' value=''></p>"
+						+ "<p>Test Name: <input type='text' name='name' value=''></p>"
 
-						+ "<p><form action='/addInfo'>Comment: <input type='text' comment='comment' value=''></p>"
+						+ "<p>Comment: <input type='text' comment='comment' value=''></p>"
 
 						+ "<p>Answer 1: <input type='text' Answer='answer1' value=''></p>"
 
