@@ -12,13 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//@Controller
+@Controller
 public class UploadController {
 
     //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "/home/student/workspace/newProj/answers/tests/";
 
-    @GetMapping("/")
+    @GetMapping("/upload")
     public String index() {
         return "upload";
     }

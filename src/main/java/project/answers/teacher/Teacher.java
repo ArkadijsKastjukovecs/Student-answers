@@ -40,7 +40,7 @@ public class Teacher {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<p> <a href='/Teacher/NewTest'>New Test upload</a></p>\n");
+		sb.append("<p> <a href='/addTest'>New Test upload</a></p>\n");
 		
 		sb.append("<p>"
 				+ "<div style='height:150px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;'>"
@@ -52,7 +52,7 @@ public class Teacher {
 				+ "<select name = 'selection'>"
                 + currentTestOptions() // input
                 + "</select></p></fieldset>"
-                + "<input type='submit' value='Submit' action='/Teacher/sendTest' method='post'>"
+                + "<input type='submit' value='Submit' action='/addTest' method='post'>"
                 + "</form>"
                 + "</div>"
 				+ "</p>");
@@ -155,7 +155,7 @@ public class Teacher {
 				}
 
 			} else {
-				sb.append("failed<br/>\n<a href='/Teacher/NewTest'>Back</a>\n");
+				sb.append("failed<br/>\n<a href='/addTest'>Back</a>\n");
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 				return sb.toString();
 			}

@@ -7,12 +7,13 @@
 </head>
 <body>
 	<div>
-		<h1>Your opportunities</h1>
+		<h1>Add new test</h1>
 	</div>
 	<div>
-		<form th:action="@{/addTest}" th:object="${Test}" method="post"  enctype="multipart/form-data">
-		<label for="name" id="file" >Select File</label>
-		<input type="file" id="file" name="file" autofocus="autofocus"/>
+		<form action="/addTest" th:object="${Test}"  method="post"  enctype="multipart/form-data">
+		
+		<label for="name" id="file1" >Select File</label>
+		<input type="file" id="file1" name="file1" autofocus="autofocus"/>
 		<br>
 		<label for="name" id="name" >Name</label>
 		<input type="text" id="name" name="name"/>

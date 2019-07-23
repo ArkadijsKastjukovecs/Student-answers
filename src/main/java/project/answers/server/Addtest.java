@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import project.answers.Server;
+import project.answers.customExceptions.MultiFileNameException;
+import project.answers.customExceptions.MultiTestNameException;
 import project.answers.tests.Test;
 
 @Controller
@@ -24,16 +27,19 @@ public class Addtest {
 	public String getTest() {
 		return "addTest";
 	}
-//comment1
+	
 	@PostMapping("/addTest")
 	public String setTest(
 			@ModelAttribute(name = "addTest") Test test,
-//			@RequestParam("Test") Test test,
-			@RequestParam("file") MultipartFile file,
+			@RequestParam("file1") MultipartFile file,
 			Model model
-			) throws IOException {
-		System.out.println(test);
-		File copied = new File("/test/" + test.getFile().getName());
+			) throws IOException, MultiFileNameException, MultiTestNameException {
+		File file1 =  new File("/tests/"+file.getName());
+		Test test1 = test;
+		test1.setFile(file1);
+		Server.testController.addTest(test1);
+		System.out.println(test1);
+		System.out.println(test.getName());
 		System.out.println("file name	: " + file.getName());
 		try {
 			// Get the file and save it somewhere
