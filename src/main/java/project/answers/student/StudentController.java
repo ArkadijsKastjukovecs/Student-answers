@@ -1,5 +1,7 @@
 package project.answers.student;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +16,7 @@ import project.answers.tests.Test;
 
 @Controller
 public class StudentController {
-	Test test = Server.testController.getTest("first");
+//	Test test = Server.testController.getTest("test1");
 	
 //	protected Connection conn;
 	/*conn = null;
@@ -66,17 +68,17 @@ public class StudentController {
 	@RequestMapping(value = "/student", method = RequestMethod.GET)
 	public String helloWorld(HttpServletRequest request, HttpServletResponse response, Model model){
 	//	Server.testController.SetActiveTest(test);
-		String test = Server.testController.getTest("first").getName();
-	
+		File file = Server.testController.getTest("test1").getFile();
+		System.out.println(file.getAbsolutePath());
 		
-		model.addAttribute("test", test);
+		model.addAttribute("test", "Working");
 		model.addAttribute("ActiveTest", Server.testController.getActiveTest());
 		return "StudentView";
 	}
-	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
-	public void excelFile(HttpServletRequest request, HttpServletResponse response){
-		request.getParameter("test");
-	}
+//	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
+//	public void excelFile(HttpServletRequest request, HttpServletResponse response){
+//		request.getParameter("test");
+//	}
 	
 	public static int getAnswers(String one, String two, String fileName, String vards) throws MultiStudentNameException{
 		

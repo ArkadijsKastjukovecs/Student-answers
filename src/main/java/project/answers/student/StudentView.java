@@ -1,4 +1,4 @@
-package project.answers.student;
+/*package project.answers.student;
 
 
 import java.io.File;
@@ -116,4 +116,4 @@ public class StudentView {
 		return sb1.toString();
 		}
 	
-}
+}*/
