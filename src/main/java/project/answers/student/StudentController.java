@@ -73,12 +73,12 @@ public class StudentController {
 		Test test = Server.testController.getTest(fileName);
 		// String passed = "";
 
-		if (one.equals(test.getAnswer1())) {
+		if (one.equalsIgnoreCase(test.getAnswer1())) {
 
 			// student.setScore(student.getScore()+1);
 			localScore++;
 		}
-		if (two.equals(test.getAnswer2())) {
+		if (two.equalsIgnoreCase(test.getAnswer2())) {
 
 			// student.setScore(student.getScore()+1);
 			localScore++;
