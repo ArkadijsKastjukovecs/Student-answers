@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import project.answers.student.Student;
 
 public class Test implements Serializable{
@@ -14,18 +16,29 @@ public class Test implements Serializable{
 	 */
 	private static final long serialVersionUID = -8729209678450935222L;
 	private File file;
+	private MultipartFile multiFile;
+	public MultipartFile getMultiFile() {
+		return multiFile;
+	}
+
+
+	public void setMultiFile(MultipartFile multiFile) {
+		this.multiFile = multiFile;
+	}
+
+
 	private String name;
-	private String question;
+	private String info;
 	private String answer1;
 	private String answer2;
 	private double studentAnswer;
-	private List<Double> answers;
+	private List<String> answers;
 	private List<Student> students;
 
-	public Test(File file, String name, String question, String answer1, String answer2) {
+	public Test(File file, String name, String info, String answer1, String answer2) {
 		this.file = file;
 		this.name = name;
-		this.question = question;
+		this.info = info;
 		this.answer1 = answer1;
 		this.answer2 = answer2;
 		answers= new ArrayList<>();
@@ -67,12 +80,12 @@ public class Test implements Serializable{
 		this.name = name;
 	}
 
-	public String getQuestion() {
-		return question;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	public String getAnswer1() {
@@ -92,7 +105,7 @@ public class Test implements Serializable{
 	}
 	
 	
-	public void addAnswer(double answer) {
+	public void addAnswer(String answer) {
 		answers.add(answer);
 	}
 	
@@ -100,7 +113,7 @@ public class Test implements Serializable{
 		answers.remove(Double.valueOf(answer));
 	}
 	
-	public List<Double> getAnswers(){
+	public List<String> getAnswers(){
 		return answers;
 	}
 
@@ -114,9 +127,11 @@ public class Test implements Serializable{
 		this.studentAnswer = studentAnswer;
 	}
 
-	
+
 	@Override
 	public String toString() {
-		return "file: "+file+", name: "+ name +", question: "+question+", answer1: "+answer1+", answer2: "+answer2 ;
+		return "Test [file=" + file + ", name=" + name + ", answer1=" + answer1 + ", answer2=" + answer2 + "]";
 	}
+
+	
 }

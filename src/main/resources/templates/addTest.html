@@ -10,7 +10,7 @@
 		<h1>Your opportunities</h1>
 	</div>
 	<div>
-		<form th:action="@{/addTest}" th:object="${Test}" method="post">
+		<form th:action="@{/addTest}" th:object="${Test}" method="post"  enctype="multipart/form-data">
 		<label for="name" id="file" >Select File</label>
 		<input type="file" id="file" name="file" autofocus="autofocus"/>
 		<br>

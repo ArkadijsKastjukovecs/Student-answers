@@ -99,10 +99,9 @@ public class TestController {
 		for (Test tst : tests) {
 			if (test.getName().equalsIgnoreCase(tst.getName()))
 				throw new MultiTestNameException(tst.getName());
-			if (test.getFile().getName().equals(tst.getFile().getName()))
-				throw new MultiFileNameException(tst.getFile().getName());
+//			if (test.getFile().getName().equals(tst.getFile().getName()))
+//				throw new MultiFileNameException(tst.getFile().getName());
 		}
-
 		tests.add(test);
 		saveTests();
 		for (Test tst : tests)
@@ -116,6 +115,7 @@ public class TestController {
 				throw new MultiStudentNameException(std.getStudName() + ":" + std.getFileName());
 		students.add(student);
 		saveTests();
+		System.out.println(student);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -139,8 +139,6 @@ public class TestController {
 
 	public static void main(String[] args) throws MultiFileNameException, MultiTestNameException, MultiStudentNameException {
 		TestController tc = TestController.getInstance();
-		tc.addTest(new Test(null, "name", "question", "123", "123"));
-		tc.AddStudent(new Student("janis", "name", 2));
 	}
 
 }

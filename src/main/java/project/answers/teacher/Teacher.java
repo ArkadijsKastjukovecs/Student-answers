@@ -1,8 +1,6 @@
-/*package project.answers.teacher;
+package project.answers.teacher;
 
 import java.io.File;
-
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,11 +16,9 @@ import javax.servlet.http.Part;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import project.answers.customExceptions.MultiTestNameException;
 import project.answers.tests.Test;
@@ -90,9 +86,9 @@ public class Teacher {
 
 						+ "<p><form action='/addInfo'>Comment: <input type='text' comment='comment' value=''></p>"
 
-						+ "<p>Answer 1: <input type='text' Answer='answer1' value=''></p>"
+						+ "<p>Answer 1: <input type='text' name='answer1' value=''></p>"
 
-						+ "<p>Answer 2: <input type='text' Answer='answer2' value=''></p>"
+						+ "<p>Answer 2: <input type='text' name='answer2' value=''></p>"
 
 						+ "</form>"
 
@@ -128,7 +124,7 @@ public class Teacher {
 			            } catch (IOException e) {
 			                throw new IOException("Facing issues in creating file " + filePath, e);
 			            }
-			            
+			        }
 			        
 					// OLD CODE BELOW
 					//File testExcel = File.createTempFile(fileName, "", null);
@@ -141,9 +137,9 @@ public class Teacher {
 					
 					Test test = new Test(theFile, request.getParameter("name"), request.getParameter("comment"),
 							request.getParameter("answer1"), request.getParameter("answer2"));
-
-					testcont.addTest(test);
+					System.out.println(test);
 					
+					testcont.addTest(test);
 					fileContent.close();
 					outStream.close();
 
@@ -151,7 +147,7 @@ public class Teacher {
 							+ "<p>_________</p>" + test.getFile().getPath());
 					return sb.toString();
 
-				}} catch (Exception e) {
+				} catch (Exception e) {
 					sb.append("<h1>Couldnt insert test</h1>\n" + e.getMessage() + e.getStackTrace() + e.getCause());
 					response.setStatus(HttpServletResponse.SC_OK);
 					e.printStackTrace();
@@ -181,7 +177,6 @@ public class Teacher {
 		for(Test test : testcont.showAllTests()){
 			if(test.getName().equals(request.getParameter("selection"))){
 				testcont.SetActiveTest(test);
-				System.out.println(testcont.getActiveTest());
 				return "Test sent successfully to students! <a href='/Teacher'>Back</a>";
 			}
 		}
@@ -199,7 +194,6 @@ public class Teacher {
 	public String currentTestOptions() {
 		
 		StringBuilder sb = new StringBuilder();
-		
 		for(Test test : testcont.showAllTests()){
 			sb.append("<option value = '" + test.getName() + "'>" + test.getName() + " - " + test.getFile().getName() + "</option>");
 		}
@@ -212,10 +206,9 @@ public class Teacher {
 		StringBuilder sb = new StringBuilder();
 		
 		for(Test test : testcont.showAllTests()){
-			sb.append("<p>" + test.getName() + " - " + test.getFile().getName() +"</p>");
+			sb.append("<p>" + test.getName() + " - " + test.getInfo() +"</p>");
 		}
 		
 		return sb.toString();
 	}
 }
-*/
