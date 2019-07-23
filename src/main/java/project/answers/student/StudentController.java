@@ -65,17 +65,17 @@ public class StudentController {
 		student.setStudName(name);
 		return student;
 	}*/
-	@RequestMapping(value = "/student", method = RequestMethod.GET)
+	@RequestMapping(value = "/student", produces = "text/html;charset=UTF-8", method = RequestMethod.GET)
 	public String helloWorld(HttpServletRequest request, HttpServletResponse response, Model model){
 	//	Server.testController.SetActiveTest(test);
 		File file = Server.testController.getTest("test1").getFile();
 		System.out.println(file.getAbsolutePath());
 		
 		model.addAttribute("test", "Working");
-		model.addAttribute("ActiveTest", Server.testController.getActiveTest());
+		model.addAttribute("work", "Working");
 		return "StudentView";
 	}
-	//gg
+
 //	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
 //	public void excelFile(HttpServletRequest request, HttpServletResponse response){
 //		request.getParameter("test");
