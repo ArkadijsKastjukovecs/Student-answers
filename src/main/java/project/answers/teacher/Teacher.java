@@ -1,6 +1,7 @@
-package project.answers.teacher;
+/*package project.answers.teacher;
 
 import java.io.File;
+
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,11 +9,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Paths;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,7 +31,7 @@ import project.answers.tests.TestController;
 // Teacher webpage 
 
 @MultipartConfig
-@RestController
+@Controller
 @RequestMapping(value = "/Teacher", produces = "text/html;charset=UTF-8")
 public class Teacher {
 	TestController testcont = TestController.getInstance();
@@ -41,9 +44,31 @@ public class Teacher {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<p> <a href='/Teacher/NewTest'>New Test upload</a></p>\n"
-				+ "<p><a href='/SelectTest'>Select Test File</a> <button type='button'>Send Test</button></p>"
-				+ "\n \n \n" + "<p><a>Current Test for students:</a>\n <a href='/getCurrentTest'></a></p>");
+		sb.append("<p> <a href='/Teacher/NewTest'>New Test upload</a></p>\n");
+		
+		sb.append("<p>"
+				+ "<div style='height:150px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;'>"
+				
+				+ "<form action='/Teacher/sendTest' method='post'>"
+				
+				+ "<fieldset><p>"
+				+ "<label>Select test</label>"
+				+ "<select name = 'selection'>"
+                + currentTestOptions() // input
+                + "</select></p></fieldset>"
+                + "<input type='submit' value='Submit' action='/Teacher/sendTest' method='post'>"
+                + "</form>"
+                + "</div>"
+				+ "</p>");
+		
+		sb.append("<form action='/Teacher/resetCurrentTest' method='post'>"
+				+ "<input type='submit' value='Clear' action='/Teacher/resetCurrentTest' method='post'></form>"
+				+ "<p>Current Test for students: " + testcont.getActiveTest() + "</p>");
+		
+		sb.append(
+				"<p>All available tests on server:<div style='height:200px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;'>"
+				+ availableTestList() + "</div></p>"
+				);
 
 		return sb.toString();
 	}
@@ -51,7 +76,7 @@ public class Teacher {
 	@PostMapping
 	@RequestMapping("/NewTest")
 	@ResponseBody
-	public String newTestUpload(HttpServletRequest request, HttpServletResponse response) {
+	public String newTestUpload(HttpServletRequest request, HttpServletResponse response) throws MultiTestNameException {
 		StringBuilder sb = new StringBuilder();
 		try {
 
@@ -63,11 +88,11 @@ public class Teacher {
 
 						+ "<p><form action='/testName'>Test Name: <input type='text' name='name' value=''></p>"
 
-						+ "<p><form action='/addInfo'>Comment: <input type='text' name='comment' value=''></p>"
+						+ "<p><form action='/addInfo'>Comment: <input type='text' comment='comment' value=''></p>"
 
-						+ "<p>Answer 1: <input type='text' name='answer1' value=''></p>"
+						+ "<p>Answer 1: <input type='text' Answer='answer1' value=''></p>"
 
-						+ "<p>Answer 2: <input type='text' name='answer2' value=''></p>"
+						+ "<p>Answer 2: <input type='text' Answer='answer2' value=''></p>"
 
 						+ "</form>"
 
@@ -86,6 +111,7 @@ public class Teacher {
 
 					byte[] buffer = new byte[fileContent.available()];
 					fileContent.read(buffer);
+					
 					
 					
 					File directory = new File("./tests");
@@ -113,7 +139,6 @@ public class Teacher {
 					OutputStream outStream = new FileOutputStream(theFile);
 					outStream.write(buffer);
 					
-					
 					Test test = new Test(theFile, request.getParameter("name"), request.getParameter("comment"),
 							request.getParameter("answer1"), request.getParameter("answer2"));
 
@@ -131,8 +156,6 @@ public class Teacher {
 					response.setStatus(HttpServletResponse.SC_OK);
 					e.printStackTrace();
 					return sb.toString();
-				} catch (MultiTestNameException e) {
-					e.printStackTrace();
 				}
 
 			} else {
@@ -150,19 +173,49 @@ public class Teacher {
 	
 	
 	
-	@PostMapping
-	@RequestMapping("/CurrentTest")
+	@PostMapping("/sendTest")
 	@ResponseBody
-	public String currentTest(HttpServletRequest request, HttpServletResponse response) {
+	public String sendTest(HttpServletRequest request, HttpServletResponse response) 
+					throws IOException, ServletException{
 		
-		// html drop-down selection
-		
-		
-		
-		return "";
+		for(Test test : testcont.showAllTests()){
+			if(test.getName().equals(request.getParameter("selection"))){
+				testcont.SetActiveTest(test);
+				System.out.println(testcont.getActiveTest());
+				return "Test sent successfully to students! <a href='/Teacher'>Back</a>";
+			}
+		}
+		return "Something went wrong <a href='/Teacher'>Back</a>";
 	}
-
+	
+	@PostMapping("/resetCurrentTest")
+	@ResponseBody
+	public String resetCurrentTest(HttpServletRequest request, HttpServletResponse response){
+		testcont.SetActiveTest(null);
+		return "Current test for students was cleared! <a href='/Teacher'>Back</a>";
+	}
+	
+	
+	public String currentTestOptions() {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(Test test : testcont.showAllTests()){
+			sb.append("<option value = '" + test.getName() + "'>" + test.getName() + " - " + test.getFile().getName() + "</option>");
+		}
+		
+		return sb.toString();
+		
+	}
+	
+	public String availableTestList(){
+		StringBuilder sb = new StringBuilder();
+		
+		for(Test test : testcont.showAllTests()){
+			sb.append("<p>" + test.getName() + " - " + test.getFile().getName() +"</p>");
+		}
+		
+		return sb.toString();
+	}
 }
-
-// READ THIS
-// https://stackoverflow.com/questions/2422468/how-to-upload-files-to-server-using-jsp-servlet
+*/
