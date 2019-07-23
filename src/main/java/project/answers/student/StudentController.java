@@ -75,6 +75,7 @@ public class StudentController {
 		model.addAttribute("ActiveTest", Server.testController.getActiveTest());
 		return "StudentView";
 	}
+	//gg
 //	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
 //	public void excelFile(HttpServletRequest request, HttpServletResponse response){
 //		request.getParameter("test");
