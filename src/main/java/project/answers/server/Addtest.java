@@ -23,7 +23,7 @@ public class Addtest {
 	public String getTest() {
 		return "addTest";
 	}
- 
+//comment
 	@RequestMapping(value = "/addTest", method = RequestMethod.POST)
 	public String setTest(@ModelAttribute(name = "addTest") Test test, @RequestParam("file") MultipartFile file,
 			Model model) throws IOException {
