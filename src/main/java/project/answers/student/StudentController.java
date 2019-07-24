@@ -19,9 +19,9 @@ import project.answers.tests.Test;
 
 @Controller
 public class StudentController {
-	private static Test test;
+	private static Test test = null;
 	private static File file;
-//	private boolean downloadedTest = true;
+	private boolean downloadedTest = true;
 //	protected Connection conn;
 	/*conn = null;
 		try {
@@ -79,13 +79,17 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/student/excelFile", method = RequestMethod.POST)
-	public void excelFile(HttpServletRequest request, HttpServletResponse response)throws IOException{
+	public String excelFile(HttpServletRequest request, HttpServletResponse response, Model model){
+		response.setContentType("application/*");
 		test = Server.testController.getTest(request.getParameter("testName"));
 		if(StudentController.activeTest()){
 			 file = Server.testController.getTest(request.getParameter("testName")).getFile();
 		}else{
 			file = Server.testController.getActiveTest().getFile();
 		}
+		if(file != null){
+			
+		try{
 		OutputStream out = response.getOutputStream();
 		FileInputStream in = new FileInputStream(file.getAbsolutePath());
 		byte[] buffer = new byte[4096];
@@ -97,33 +101,42 @@ public class StudentController {
 		
 		in.close();
 		out.flush();
-
+		model.addAttribute("IOException", "Success");
+		}
+		catch(IOException e){
+			model.addAttribute("IOException", "Fail");
+			System.out.println("Nepareizais testa nosaukums");
+		}
+		}else{
+			model.addAttribute("IOException", "Fail");
+		}
 		System.out.println(request.getParameter("testName"));
+		
+		return "excelFile";
 	}
 	
 	@RequestMapping(value = "/student/buttonSubmit", method = RequestMethod.POST)
 	public String buttonSubmit(HttpServletRequest request, Model model) {
 //		System.out.println(request.getParameter("answer1")+" "+ request.getParameter("answer2"));
+//		model.addAttribute("testNull", test);
 		int localScore = 0;
-		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "") {
+		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "" && request.getParameter("vards") != "") {
 			try {
-//				downloadedTest = true;
+				downloadedTest = true;
 				localScore = StudentController.getAnswers(request.getParameter("answer1"), 
 				request.getParameter("answer2"), request.getParameter("vards"));
-				model.addAttribute("localScore", String.valueOf(localScore));
-			} catch (MultiStudentNameException e) {
+				System.out.println(String.valueOf(downloadedTest));
+			} 
+			catch(NullPointerException e){
+				downloadedTest = false;
+			}
+			catch (MultiStudentNameException e) {
 				model.addAttribute("localScore", "Sis students ar tadu vardu jau pildija so testu");
-//				return "StudentScore";
 				}
-//			catch(NullPointerException e){
-//					downloadedTest = false;
-//					model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
-//					return "StudentScore";
-//				}
-//			model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
-			System.out.println(localScore);
 		}
 		
+		model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
+		model.addAttribute("localScore", String.valueOf(localScore));
 		return "StudentScore";
 	}
 	

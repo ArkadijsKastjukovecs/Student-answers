@@ -9,6 +9,8 @@
     <body>
         <h1>Studenta majas lappa</h1>
         <br>
+        
+        
         <p><font size=+2>Lejupieladiet failu</font></p>
         <div th:if="${isActive} == null">
         	<form action="/student/excelFile" method="post">
@@ -20,13 +22,15 @@
         	<form action="/student/excelFile" method="post">
         	<a href='/student/excelFile' target='_blank'>  Excel File</a>
         	</form>
-        </div>        
+        </div>
         <hr>
         <div>
-        	<form action='/student/buttonSubmit' method="post">Jusu vards<br><input type=text name=vards><br>
-        	Ievadiet, ludzu, atbildi uz pirmo jautajumu:<br><input type=text name=answer1><br>
-        	Ievadiet, ludzu, atbildi uz otro jautajumu:<br><input type=text name=answer2><br>
+        	<form action='/student/buttonSubmit' method="post">Jusu vards<br><input type=text name=vards placeholder= "Vards.Uzvards"><br>
+        	Ievadiet, ludzu, atbildi uz pirmo jautajumu:<br><input type=text name=answer1 placeholder= "Pirma atbilde"><br>
+        	Ievadiet, ludzu, atbildi uz otro jautajumu:<br><input type=text name=answer2 placeholder= "Otra atbilde"><br>
+        	<br>
         	<button type=submit formtarget='_blank'>Apstiprinat</button></form><br/>
         </div>
+        
     </body>
 </html>
