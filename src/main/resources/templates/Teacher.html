@@ -5,17 +5,18 @@
 <title>Teacher homepage</title>
 </head>
 <body>
-	<form  th:object="${Test}" method='post'>
-		
-		<label>Select test</label> <select th:field="*{Test}">
-			<option value="">--</option>
-			<option th:each="test : ${tests}" th:value="${test.name}"
-				th:utext="${test.name}"/>
-		
-		</select> <input type='submit' value='Submit'>
-	</form>
+		<form method='post'>
+				<label>Select test</label> 
+				<select th:field="*{test}">
+					<option 
+					
+					th:each="test : ${tests}"
+					th:value="${test.getName()}"
+					th:text="${test.getName()}"
+					
+					></option>
+				</select>
+			<input type='submit' value='Submit'>
+		</form>
 </body>
 </html>
-
-
-
