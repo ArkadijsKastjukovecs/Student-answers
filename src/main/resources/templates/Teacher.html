@@ -5,14 +5,14 @@
 <title>Teacher homepage</title>
 </head>
 <body>
-		<form name='f' method='post'>
+		<form method='post'>
 				<label>Select test</label> 
-				<select class="form-control" th:field"${test.name}">
+				<select th:field="*{test}">
 					<option 
 					
 					th:each="test : ${tests}"
-					th:value="${test.name}"
-					th:text="${test}"
+					th:value="${test.getName()}"
+					th:text="${test.getName()}"
 					
 					></option>
 				</select>
