@@ -1,10 +1,13 @@
 package project.answers.teacher;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
+
+import org.springframework.asm.Type;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,53 +27,26 @@ import project.answers.tests.TestController;
 public class TeacherController {
 	
 	TestController testcont = TestController.getInstance();
-	
-	//@RequestMapping(value = "sendTest", method = RequestMethod.POST)
-	@PostMapping("/sendTest")
-	public String sendTest(Model model) throws IOException, ServletException{
-		
-		for(Test test : testcont.showAllTests()){
-			if(test.getName().equals("selection")){
-				testcont.SetActiveTest(test);
-				System.out.println(testcont.getActiveTest());
-				return "sendtest";
-			}
-		}
-		return "sendTest";
-	}
-	
-	//@RequestMapping(value = "resetCurrentTest", method = RequestMethod.POST)
-	@PostMapping("/resetCurrentTest")
-	public String resetCurrentTest(Model model){
-		testcont.SetActiveTest(null);
-		
-		return "resetCurrentTest";
-	}
-	
-	
-	//@RequestMapping(value = "currentTestOptions", method = RequestMethod.GET)
-	//@ModelAttribute("/currentTestOptions")
+
+	@RequestMapping(value = "/currentTestOptions", method = RequestMethod.GET)
 	@GetMapping("/currentTestOptions")
 	public String currentTestOptions(Model model) {
 		
-		model.addAttribute("tests", testcont.showAllTests());
+		Test test = new Test();
+		model.addAttribute("test", test);
+		
+		List<Test> tests = testcont.showAllTests();
+		model.addAttribute("tests", tests);
+		
 		return "currentTestOptions";
+		
 	}
-	
-	
-	//@RequestMapping(value = "getActiveTest", method = RequestMethod.GET)
-	@GetMapping("/getActiveTest")
-	public String getActiveTest(){
-		return testcont.getActiveTest().toString();
-	}
-	
-	/*@ModelAttribute("allTypes")
-	public List<String> populateTypes() {
-	    return Arrays.asList(String.);
-	}*/
-	
 }
 
+
+
 // READ THIS
+// https://o7planning.org/en/11659/thymeleaf-form-select-option-example#a14065280
+// AND THIS
 // https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#model-attributes
 // 7.5 and 5.4 points. Get tutorial version working, change to our case.
