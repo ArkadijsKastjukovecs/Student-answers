@@ -5,18 +5,27 @@
 <title>Teacher homepage</title>
 </head>
 <body>
-		<form method='post'>
-				<label>Select test</label> 
-				<select th:field="*{test}">
-					<option 
-					
-					th:each="test : ${tests}"
-					th:value="${test.getName()}"
-					th:text="${test.getName()}"
-					
-					></option>
-				</select>
-			<input type='submit' value='Submit'>
-		</form>
+	<p>
+		<a href='/Teacher/NewTest'>New Test upload</a> <a href='/Teacher/TestResults'>See Test Results</a>
+	</p>
+	
+	<form id="dropdown" th:action="@{/sendTest}" method='post'>
+	
+		<label>Select test</label> <select th:field="*{test}">
+			<option th:each="test : ${tests}" th:value="${test.getName()}"
+				th:text="${test.getName()}"></option>
+		</select> <input type='submit' value='Submit'>
+	</form>
+	
+	<a> Current test for students: </a>
+	<p th:text="${activeTest}" ></p>
+	<div>
+	<a>Available tests for students:</a>
+	<th:block th:each="test : ${tests}">
+		<tr>
+			<td th:text="${test.getName()}">...</td>
+			<td th:text="${test.getFile().getName()}">...</td>
+		</tr>
+	</div>
 </body>
 </html>

@@ -1,23 +1,26 @@
 package project.answers.teacher;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.validation.Valid;
 
 import org.springframework.asm.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import project.answers.tests.Test;
 import project.answers.tests.TestController;
 
@@ -32,28 +35,28 @@ public class TeacherController {
 
 	
 	@Autowired
-	//@RequestMapping(value = "/currentTestOptions", method = RequestMethod.GET)
 	@GetMapping("Teacher")
-	public ModelAndView currentTestOptions(/*Model model*/) {
+	public ModelAndView currentTestOptions() {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("Teacher");
+		mav.addObject("activeTest", testcont.getActiveTest());
 		mav.addObject("test", new Test());
 		mav.addObject("tests", testcont.showAllTests());
 		
-		
-		/*Test test = new Test();
-		model.addAttribute("test", test);
-		
-		List<Test> tests = testcont.showAllTests();
-		model.addAttribute("tests", tests);
-		
-		return "currentTestOptions";*/
-		
 		return mav;
+	}
+	
+	@PostMapping("/sendTest")
+	public String sendTest(@Valid Test test){
+		
+		testcont.SetActiveTest(test);
+		
+		return "sendTest";
 		
 	}
+	
 }
 
 
