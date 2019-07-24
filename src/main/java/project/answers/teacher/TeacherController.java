@@ -28,8 +28,8 @@ public class TeacherController {
 	
 	TestController testcont = TestController.getInstance();
 
-	@RequestMapping(value = "/currentTestOptions", method = RequestMethod.GET)
-	@GetMapping("/currentTestOptions")
+	@RequestMapping(value = "/Teacher", method = RequestMethod.GET)
+//	@GetMapping("/currentTestOptions")
 	public String currentTestOptions(Model model) {
 		
 		Test test = new Test();
@@ -38,7 +38,7 @@ public class TeacherController {
 		List<Test> tests = testcont.showAllTests();
 		model.addAttribute("tests", tests);
 		
-		return "currentTestOptions";
+		return "Teacher";
 		
 	}
 }

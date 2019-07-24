@@ -28,7 +28,7 @@ import project.answers.tests.TestController;
 
 @MultipartConfig
 @Controller
-@RequestMapping(value = "/Teacher", produces = "text/html;charset=UTF-8")
+//@RequestMapping(value = "/Teacher", produces = "text/html;charset=UTF-8")
 public class Teacher {
 	TestController testcont = TestController.getInstance();
 
