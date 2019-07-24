@@ -7,18 +7,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<div th:if="${downloadedTest} == 'true'">
-
-    		<p>Jusu atzime ir: </p>
-    		<hr>
-    		<p th:text="${localScore}"></p>
-	    	</div> 
-    	<div th:if="${downloadedTest} == 'false'">
-    		<p><font size=+2>Pirms sakt aizpildit laukus, lejupielade testu, ludzu</font></p>
-   		</div>
-    <div th:if="${testNull} == 'null'">
-    	<p><font size=+2>Sada testa neeksiste.<br>
-    	Pameginiet velreiz</font></p>
-    </div>
+    	<div th:if="${IOException} == 'Success'">
+    		<p>Sucess</p>
+    	</div>
+    	<div th:if="${IOException} == 'Fail'">
+    		<p>Sads tests neeksiste</p>
+    	</div>
     </body>
 </html>
