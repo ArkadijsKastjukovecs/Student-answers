@@ -92,7 +92,7 @@ public class StudentController {
 		try{
 		OutputStream out = response.getOutputStream();
 		FileInputStream in = new FileInputStream(file.getAbsolutePath());
-		byte[] buffer = new byte[4096];
+		byte[] buffer = new byte[in.available()];
 		int length;
 		while ((length = in.read(buffer)) > -1){
 		    out.write(buffer, 0, length);
