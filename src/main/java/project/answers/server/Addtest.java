@@ -41,7 +41,7 @@ public class Addtest {
 			System.out.println("file name: " + file.getOriginalFilename());
 			// Get the file and save it somewhere
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get("/home/student/workspace/newProj/answers/tests/" + file.getOriginalFilename());
+			Path path = Paths.get("./tests/" + file.getOriginalFilename());
 			Files.write(path, bytes);
 			redirectAttributes.addFlashAttribute("message",
 					"Jums izdēvas izvedot jaunu testu '" + test1.getName() + "'");
