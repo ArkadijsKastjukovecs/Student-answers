@@ -1,6 +1,9 @@
 package project.answers.student;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +19,9 @@ import project.answers.tests.Test;
 
 @Controller
 public class StudentController {
-//	Test test = Server.testController.getTest("test1");
-	
+	private static Test test;
+	private static File file;
+//	private boolean downloadedTest = true;
 //	protected Connection conn;
 	/*conn = null;
 		try {
@@ -67,37 +71,75 @@ public class StudentController {
 	}*/
 	@RequestMapping(value = "/student", produces = "text/html;charset=UTF-8", method = RequestMethod.GET)
 	public String helloWorld(HttpServletRequest request, HttpServletResponse response, Model model){
-	//	Server.testController.SetActiveTest(test);
-		File file = Server.testController.getTest("test1").getFile();
-		System.out.println(file.getAbsolutePath());
 		
-		model.addAttribute("test", "Working");
-		model.addAttribute("work", "Working");
+	//	Server.testController.SetActiveTest(test);
+	//	System.out.println(Server.testController.getActiveTest());
+		model.addAttribute("isActive", Server.testController.getActiveTest());
 		return "StudentView";
 	}
 
-//	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
-//	public void excelFile(HttpServletRequest request, HttpServletResponse response){
-//		request.getParameter("test");
-//	}
+	@RequestMapping(value = "/student/excelFile", method = RequestMethod.POST)
+	public void excelFile(HttpServletRequest request, HttpServletResponse response)throws IOException{
+		test = Server.testController.getTest(request.getParameter("testName"));
+		if(StudentController.activeTest()){
+			 file = Server.testController.getTest(request.getParameter("testName")).getFile();
+		}else{
+			file = Server.testController.getActiveTest().getFile();
+		}
+		OutputStream out = response.getOutputStream();
+		FileInputStream in = new FileInputStream(file.getAbsolutePath());
+		byte[] buffer = new byte[4096];
+		int length;
+		while ((length = in.read(buffer)) > -1){
+		    out.write(buffer, 0, length);
+		}
+		System.out.println(file.getName());
+		
+		in.close();
+		out.flush();
+
+		System.out.println(request.getParameter("testName"));
+	}
 	
-	public static int getAnswers(String one, String two, String fileName, String vards) throws MultiStudentNameException{
+	@RequestMapping(value = "/student/buttonSubmit", method = RequestMethod.POST)
+	public String buttonSubmit(HttpServletRequest request, Model model) {
+//		System.out.println(request.getParameter("answer1")+" "+ request.getParameter("answer2"));
+		int localScore = 0;
+		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "") {
+			try {
+//				downloadedTest = true;
+				localScore = StudentController.getAnswers(request.getParameter("answer1"), 
+				request.getParameter("answer2"), request.getParameter("vards"));
+				model.addAttribute("localScore", String.valueOf(localScore));
+			} catch (MultiStudentNameException e) {
+				model.addAttribute("localScore", "Sis students ar tadu vardu jau pildija so testu");
+//				return "StudentScore";
+				}
+//			catch(NullPointerException e){
+//					downloadedTest = false;
+//					model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
+//					return "StudentScore";
+//				}
+//			model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
+			System.out.println(localScore);
+		}
+		
+		return "StudentScore";
+	}
+	
+	public static int getAnswers(String one, String two, String vards) throws MultiStudentNameException{
 		
 		int localScore = 0;
-		Test test = Server.testController.getTest(fileName);
-		//String passed = "";
-		
 		if(one.equals(test.getAnswer1())){
 			
-			//student.setScore(student.getScore()+1);
 			localScore++;
 		}
 		if(two.equals(test.getAnswer2())){
 			
-			//student.setScore(student.getScore()+1);
 			localScore++;
 		}
-		Student student = new Student(vards, fileName, localScore);
+		Student student = new Student(vards, file.getName(), localScore);
+		System.out.println(student.toString());
 		Server.testController.AddStudent(student);
 		return student.getScore();
 		
