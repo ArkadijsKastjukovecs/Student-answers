@@ -34,13 +34,11 @@ public class Addtest {
 			@RequestParam("file1") MultipartFile file,
 			Model model
 			) throws IOException, MultiFileNameException, MultiTestNameException {
-		File file1 =  new File("/tests/"+file.getName());
+		File file1 =  new File("./tests/"+file.getOriginalFilename());
 		Test test1 = test;
 		test1.setFile(file1);
 		Server.testController.addTest(test1);
-		System.out.println(test1);
-		System.out.println(test.getName());
-		System.out.println("file name	: " + file.getName());
+		System.out.println("file name: " + file.getOriginalFilename());
 		try {
 			// Get the file and save it somewhere
 			byte[] bytes = file.getBytes();
