@@ -21,5 +21,4 @@ public class MvcConfig implements WebMvcConfigurer {
 		
 		registry.addViewController("/student").setViewName("StudentView");
 	}
-
 }

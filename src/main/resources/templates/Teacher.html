@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Teacher homepage</title>
+</head>
+<body>
+		<form name='f' method='post'>
+				<label>Select test</label> 
+				<select class="form-control" th:field"${test.name}">
+					<option 
+					
+					th:each="test : ${tests}"
+					th:value="${test.name}"
+					th:text="${test}"
+					
+					></option>
+				</select>
+			<input type='submit' value='Submit'>
+		</form>
+</body>
+</html>

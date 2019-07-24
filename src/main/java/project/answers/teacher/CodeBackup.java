@@ -1,5 +1,15 @@
 package project.answers.teacher;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import project.answers.tests.Test;
+
 public class CodeBackup {
 
 }
@@ -158,3 +168,66 @@ public class Teacher {
 
 ******************************BACKUP END****************************
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+@PostMapping("/sendTest")
+public String sendTest(Model model) throws IOException, ServletException{
+	
+	for(Test test : testcont.showAllTests()){
+		if(test.getName().equals("selection")){
+			testcont.SetActiveTest(test);
+			System.out.println(testcont.getActiveTest());
+			return "sendtest";
+		}
+	}
+	return "sendTest";
+}
+
+//@RequestMapping(value = "resetCurrentTest", method = RequestMethod.POST)
+@PostMapping("/resetCurrentTest")
+public String resetCurrentTest(Model model){
+	testcont.SetActiveTest(null);
+	
+	return "resetCurrentTest";
+}
+
+
+//@RequestMapping(value = "currentTestOptions", method = RequestMethod.GET)
+//@ModelAttribute("/currentTestOptions")
+@GetMapping("/currentTestOptions")
+public String currentTestOptions(Model model) {
+	
+	model.addAttribute("tests", testcont.showAllTests());
+	return "currentTestOptions";
+}
+
+
+//@RequestMapping(value = "getActiveTest", method = RequestMethod.GET)
+@GetMapping("/getActiveTest")
+public String getActiveTest(){
+	return testcont.getActiveTest().toString();
+}	*/
