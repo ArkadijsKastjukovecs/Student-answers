@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<style>hr { display: block;margin-top: 0.5em;margin-bottom: 0.5em;margin-left: auto;margin-right: auto;border-style: inset;border-width: 1px;}</style>
+    <head>
+        <title>Prieks studentiem</title>
+        <meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+<!--     <div th:if="${downloadedTest} == true"> -->
+		<div>
+    	<p>Jusu atzime ir: </p>
+    	<hr>
+    	<p th:text="${localScore}"></p>
+	    </div> 
+<!--     <div th:if="${downloadedTest} == false"> -->
+<!--     	<p><font size=+2>Pirms sakt aizpildit laukus, lejupielade testu, ludzu</font></p> -->
+<!--     </div> -->
+    </body>
+</html>

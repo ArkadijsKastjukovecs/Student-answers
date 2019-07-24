@@ -1,4 +1,4 @@
-package project.answers.student;
+/*package project.answers.student;
 
 
 import java.io.File;
@@ -23,7 +23,6 @@ import project.answers.customExceptions.MultiStudentNameException;
 @RestController
 @RequestMapping(value = "/student", produces = "text/html;charset=UTF-8")
 public class StudentView {
-	
 //	Test test5 = Server.testController.getTest("first");
 	
 	String help = "";
@@ -34,7 +33,6 @@ public class StudentView {
     @ResponseBody
     public String homePage(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
             HttpServletResponse response) {
-	System.out.println(StudentController.activeTest());
     StringBuilder sb = new StringBuilder();
  //   Server.testController.SetActiveTest(test5);
     if(StudentController.activeTest()){
@@ -43,7 +41,7 @@ public class StudentView {
     		+ "<button type=submit formtarget='_blank'>Lejupieladet</button></form><br/>\n");
     }else{
     	sb.append("<form action='/student/excelFile'><font size = +2 >Testa nosaukums</font>"
-    			+ "<a href='/student/excelFile' target='_blank'>  Excel File</a></form>\n");
+    			+ "<a href='/student/excelFile' target='_blank'>  Excel File</a>\n");
     }
     sb.append("<hr>\n");
     sb.append("<form action='/student/buttonSubmit'>Jusu vards<br><input type=text name=vards><br>\n"
@@ -71,7 +69,7 @@ public class StudentView {
 //			response.setContentType("application/ods");
 			OutputStream out = response.getOutputStream();
 			FileInputStream in = new FileInputStream(file.getAbsolutePath());
-			byte[] buffer = new byte[in.available()];
+			byte[] buffer = new byte[4096];
 			int length;
 			while ((length = in.read(buffer)) > -1){
 			    out.write(buffer, 0, length);
@@ -118,4 +116,4 @@ public class StudentView {
 		return sb1.toString();
 		}
 	
-}
+}*/

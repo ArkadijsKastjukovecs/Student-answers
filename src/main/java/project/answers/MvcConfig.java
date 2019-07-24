@@ -19,7 +19,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/upload").setViewName("upload");
 		
 		
-		
+		registry.addViewController("/student").setViewName("StudentView");
 	}
 
 }
