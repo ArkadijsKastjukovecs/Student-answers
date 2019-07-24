@@ -7,21 +7,22 @@
 </head>
 <body>
 	<div>
-		<h1>Add new test</h1>
+		<h1>Pievienot jaunu testu</h1>
 	</div>
+	
 	<div>
 		<form action="/addTest" th:object="${Test}"  method="post"  enctype="multipart/form-data">
 		
-		<label for="file1" >Select File</label>
+		<label for="file1" >Izvēlēties failu</label>
 		<input type="file"  name="file1" autofocus="autofocus"/>
 		<br>
-		<label for="name" id="name" >Name</label>
+		<label for="name" id="name" >Testa nosaukums</label>
 		<input type="text" id="name" name="name"/>
 		<br>
-		<label for="answer1" id="answer1" >First correct answer</label>
+		<label for="answer1" id="answer1" >Pirmā atbilde</label>
 		<input type="text" id="answer1" name="answer1"/>
 		<br>
-		<label for="answer2" id="answer2" >Second correct answer</label>
+		<label for="answer2" id="answer2" >Otrā atbilde</label>
 		<input type="text" id="answer2" name="answer2"/>
 		<br>
 		<input type="submit" value="Click"/></form>

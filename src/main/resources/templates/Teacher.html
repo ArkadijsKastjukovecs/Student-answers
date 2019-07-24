@@ -5,8 +5,9 @@
 <title>Teacher homepage</title>
 </head>
 <body>
-		<form method='post'>
-				<label>Select test</label> 
+	<a th:href="@{/addTest}">Pievienot jaunu testu</a><br> 
+		<form  action="#" th:action="@{/Teacher}" method='post'>
+				<label>Izvēlēties tekošo testu</label> 
 				<select th:field="*{test}">
 					<option 
 					
@@ -16,7 +17,7 @@
 					
 					></option>
 				</select>
-			<input type='submit' value='Submit'>
+			<input type='submit' value='Apstiprināt'>
 		</form>
 </body>
 </html>

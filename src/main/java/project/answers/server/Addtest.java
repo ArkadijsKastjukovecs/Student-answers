@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.answers.Server;
 import project.answers.customExceptions.MultiFileNameException;
@@ -27,27 +28,35 @@ public class Addtest {
 	public String getTest() {
 		return "addTest";
 	}
-	
+
 	@PostMapping("/addTest")
-	public String setTest(
-			@ModelAttribute(name = "addTest") Test test,
-			@RequestParam("file1") MultipartFile file,
-			Model model
-			) throws IOException, MultiFileNameException, MultiTestNameException {
-		File file1 =  new File("./tests/"+file.getOriginalFilename());
+	public String setTest(@ModelAttribute(name = "addTest") Test test, @RequestParam("file1") MultipartFile file,
+			Model model, RedirectAttributes redirectAttributes) {
+		File file1 = file.getOriginalFilename().trim().equalsIgnoreCase("") ? null
+				: new File("./tests/" + file.getOriginalFilename());
 		Test test1 = test;
-		test1.setFile(file1);
-		Server.testController.addTest(test1);
-		System.out.println("file name: " + file.getOriginalFilename());
 		try {
+			test1.setFile(file1);
+			Server.testController.addTest(test1);
+			System.out.println("file name: " + file.getOriginalFilename());
 			// Get the file and save it somewhere
 			byte[] bytes = file.getBytes();
 			Path path = Paths.get("/home/student/workspace/newProj/answers/tests/" + file.getOriginalFilename());
 			Files.write(path, bytes);
+			redirectAttributes.addFlashAttribute("message",
+					"Jums izdēvas izvedot jaunu testu '" + test1.getName() + "'");
 
 		} catch (IOException e) {
+
+			redirectAttributes.addFlashAttribute("message", "Jums izdēvas izvedot jaunu testu '" + test1.getName() + "' bez faila");
+
+		} catch (MultiFileNameException e) {
+			e.printStackTrace();
+		} catch (MultiTestNameException e) {
+			redirectAttributes.addFlashAttribute("message",
+					"Testi ar vienādiem nosaukumiem netiek pieņemti: '" + test1.getName() + "'");
 			e.printStackTrace();
 		}
-		return "index";
+		return "redirect:/uploadStatus";
 	}
 }

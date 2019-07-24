@@ -120,7 +120,8 @@ public class TestController {
 
 	@SuppressWarnings("unchecked")
 	public void loadTests() {
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("list"))) {
+		try (ObjectInputStream ois = 
+				new ObjectInputStream(new FileInputStream("list"))) {
 			tests = (List<Test>) ois.readObject();
 			students = (List<Student>) ois.readObject();
 		} catch (Exception e) {
@@ -129,7 +130,8 @@ public class TestController {
 	}
 
 	public void saveTests() {
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("list"))) {
+		try (ObjectOutputStream oos = 
+				new ObjectOutputStream(new FileOutputStream("list"))) {
 			oos.writeObject(tests);
 			oos.writeObject(students);
 		} catch (Exception e) {
