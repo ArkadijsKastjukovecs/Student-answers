@@ -103,11 +103,11 @@ public class TeacherController {
 	@RequestMapping(value = {"/sendTest"}, method = RequestMethod.POST, params="action=Results")
 	public String testResults(@Valid @ModelAttribute("test") Test test, BindingResult bindingResult, Model model){
 		
-		for(Test i : testcont.showAllTests()){
-			if(i.getName().equals(test.getName())) {
-				model.addAttribute("Answer", i.getStudentAnswer());
-			}
+		List<Student> students = testcont.findStudentsByTest(test);
+		for (Student i : students){
+			System.out.println(i);
 		}
+		model.addAttribute("students", students);
 		
 		return "TestResults";
 

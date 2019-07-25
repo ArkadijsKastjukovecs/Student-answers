@@ -117,6 +117,6 @@ public class Test implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "file: "+file+", name: "+ name +", question: "+question+", answer1: "+answer1+", answer2: "+answer2 ;
+		return "file: "+file+", name: "+ name +", question: "+question+", answer1: "+answer1+", answer2: "+answer2+"\n" ;
 	}
 }

@@ -24,13 +24,13 @@
 	
 	<a> Current test for students: </a>
 	<p th:text="${currentTest}" ></p>
-	<div>
 	<a>Available tests for students:</a>
+	<div style='height:400px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;'>
 	<th:block th:each="test : ${tests}">
 		<tr>
-			<td th:text="${test.getName()}">...</td>
-			<td th:text="${test.getFile().getName()}">...</td>
+			<td th:text="${test.getName()}"></td>
 		</tr>
+		<br>
 	</div>
 </body>
 </html>
