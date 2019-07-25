@@ -52,19 +52,19 @@ public class MainWindow extends JFrame {
 		list = new JList(Server.testController.showAllTests().toArray());
 		JScrollPane scrollPane1 = new JScrollPane(list);
 		panel.add(scrollPane1, BorderLayout.CENTER);
-	    MouseListener mouseListener = new MouseAdapter() {
-	        public void mouseClicked(MouseEvent mouseEvent) {
-	          JList<Test> theList = (JList<Test>) mouseEvent.getSource();
-	          if (mouseEvent.getClickCount() == 2) {
-	            int index = theList.locationToIndex(mouseEvent.getPoint());
-	            if (index >= 0) {
-	              Test o = theList.getModel().getElementAt(index);
-	              Server.testController.SetActiveTest(o);
-	            }
-	          }
-	        }
-	      };
-	      list.addMouseListener(mouseListener);
+		MouseListener mouseListener = new MouseAdapter() {
+			public void mouseClicked(MouseEvent mouseEvent) {
+				JList<Test> theList = (JList<Test>) mouseEvent.getSource();
+				if (mouseEvent.getClickCount() == 2) {
+					int index = theList.locationToIndex(mouseEvent.getPoint());
+					if (index >= 0) {
+						Test o = theList.getModel().getElementAt(index);
+						Server.testController.SetActiveTest(o);
+					}
+				}
+			}
+		};
+		list.addMouseListener(mouseListener);
 		setSize(392, 373);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
