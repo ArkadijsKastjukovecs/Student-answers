@@ -108,6 +108,7 @@ public class TeacherController {
 			System.out.println(i);
 		}
 		model.addAttribute("students", students);
+		model.addAttribute("test", test);
 		
 		return "TestResults";
 
