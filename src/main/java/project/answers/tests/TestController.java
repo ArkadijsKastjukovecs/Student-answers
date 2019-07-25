@@ -1,5 +1,6 @@
 package project.answers.tests;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -29,6 +30,10 @@ public class TestController {
 	public static TestController getInstance() {
 		if (instance == null) {
 			instance = new TestController();
+			File directory = new File("./tests");
+	        if (!directory.exists() && !directory.mkdirs()) {
+	        	System.err.println("Map wasn't created");
+	        }
 		}
 		return instance;
 

@@ -151,7 +151,7 @@ public class StudentController {
 			
 			localScore++;
 		}
-		Student student = new Student(vards, file.getName(), localScore);
+		Student student = new Student(vards, test.getName(), localScore);
 		System.out.println(student.toString());
 		Server.testController.AddStudent(student);
 		return student.getScore();

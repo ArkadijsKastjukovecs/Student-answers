@@ -30,13 +30,16 @@ public class Addtest {
 	}
 
 	@PostMapping("/addTest")
-	public String setTest(@ModelAttribute(name = "addTest") Test test, @RequestParam("file1") MultipartFile file,
+	public String setTest(@ModelAttribute(name = "addTest") Test test, 
+			@RequestParam("file1") MultipartFile file,
 			Model model, RedirectAttributes redirectAttributes) {
 		File file1 = file.getOriginalFilename().trim().equalsIgnoreCase("") ? null
 				: new File("./tests/" + file.getOriginalFilename());
 		Test test1 = test;
 		try {
 			test1.setFile(file1);
+			if (test1.getName().trim().equalsIgnoreCase(""))
+				throw new Exception();
 			Server.testController.addTest(test1);
 			System.out.println("file name: " + file.getOriginalFilename());
 			// Get the file and save it somewhere
@@ -44,11 +47,11 @@ public class Addtest {
 			Path path = Paths.get("./tests/" + file.getOriginalFilename());
 			Files.write(path, bytes);
 			redirectAttributes.addFlashAttribute("message",
-					"Jums izdēvas izvedot jaunu testu '" + test1.getName() + "'");
+					"Jums izdevas izvedot jaunu testu '" + test1.getName() + "'");
 
 		} catch (IOException e) {
 
-			redirectAttributes.addFlashAttribute("message", "Jums izdēvas izvedot jaunu testu '" + test1.getName() + "' bez faila");
+			redirectAttributes.addFlashAttribute("message", "Jums izdevas izvedot jaunu testu '" + test1.getName() + "' bez faila");
 
 		} catch (MultiFileNameException e) {
 			e.printStackTrace();
@@ -56,6 +59,9 @@ public class Addtest {
 			redirectAttributes.addFlashAttribute("message",
 					"Testi ar vienādiem nosaukumiem netiek pieņemti: '" + test1.getName() + "'");
 			e.printStackTrace();
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("message", "Testi bez nosaukuma netiek pieņemti");
+			
 		}
 		return "redirect:/uploadStatus";
 	}
