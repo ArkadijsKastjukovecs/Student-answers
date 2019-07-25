@@ -13,13 +13,13 @@
         
         <p><font size=+2>Lejupieladiet failu</font></p>
         <div th:if="${isActive} == null">
-        	<form action="/student/excelFile" method="post">
+        	<form action="/student/excelFile" method="get">
         	<input type=text name=testName>
         	<button type=submit formtarget='_self'>Lejupieladet</button>
         	</form>
         </div>
         <div th:unless="${isActive} == null">
-        	<form action="/student/excelFile" method="post">
+        	<form action="/student/excelFile" method="get">
         	<a href='/student/excelFile' target='_self'>  Excel File</a>
         	</form>
         </div>
