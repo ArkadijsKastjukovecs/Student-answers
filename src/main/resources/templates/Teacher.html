@@ -5,19 +5,32 @@
 <title>Teacher homepage</title>
 </head>
 <body>
-	<a th:href="@{/addTest}">Pievienot jaunu testu</a><br> 
-		<form  action="#" th:action="@{/Teacher}" method='post'>
-				<label>Izvēlēties tekošo testu</label> 
-				<select th:field="*{test}">
-					<option 
-					
-					th:each="test : ${tests}"
-					th:value="${test.getName()}"
-					th:text="${test.getName()}"
-					
-					></option>
-				</select>
-			<input type='submit' value='Apstiprināt'>
-		</form>
+	<p>
+		<a href='/NewTest'>New Test upload</a>
+	</p>
+	
+	<div>
+		<form th:action="@{/sendTest}" th:object="${Test}"  method="post">
+		<label for="name" id="name" >Name</label>
+		<input type="text" id="name" name="name"/>
+		
+		<input type="submit" name="action" value="Send"/>
+		<input type="submit" name="action" value="Clear"/>
+		<input type="submit" name="action" value="Results"/></form>
+		<br>
+	</div>
+	
+	
+	
+	<a> Current test for students: </a>
+	<p th:text="${currentTest}" ></p>
+	<a>Available tests for students:</a>
+	<div style='height:400px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;'>
+	<th:block th:each="test : ${tests}">
+		<tr>
+			<td th:text="${test.getName()}"></td>
+		</tr>
+		<br>
+	</div>
 </body>
 </html>

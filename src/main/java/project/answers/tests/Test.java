@@ -130,7 +130,11 @@ public class Test implements Serializable{
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return "Test [file=" + file + ", name=" + name + ", answer1=" + answer1 + ", answer2=" + answer2 + "]";
+=======
+		return "file: "+file+", name: "+ name +", question: "+question+", answer1: "+answer1+", answer2: "+answer2+"\n" ;
+>>>>>>> refs/remotes/origin/MartinBranch2
 	}
 
 	

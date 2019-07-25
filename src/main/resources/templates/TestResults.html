@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Test Results</title>
+</head>
+<body>
+	<p><a href='/Teacher'>Back</a></p>
+	
+	<p>
+	
+	<th:block th:each="student : ${students}">
+		<tr>
+			<td th:text="${student}">...</td>
+		</tr>
+	
+	</p>
+	
+	<p th:text="${students}" ></p>
+	
+	
+</body>
+</html>

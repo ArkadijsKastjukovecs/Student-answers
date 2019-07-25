@@ -1,25 +1,33 @@
 package project.answers.teacher;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.validation.Valid;
 
 import org.springframework.asm.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.answers.student.Student;
 import project.answers.tests.Test;
 import project.answers.tests.TestController;
+
 
 // Teacher webpage 
 
@@ -29,31 +37,82 @@ import project.answers.tests.TestController;
 public class TeacherController {
 	
 	TestController testcont = TestController.getInstance();
+	
+	@RequestMapping(value = {"/Teacher"}, method = RequestMethod.GET)
+	public String teacher(Model model) {
+		
+		model.addAttribute("Test", new Test());
+		model.addAttribute("tests", testcont.showAllTests());
+		model.addAttribute("currentTest", testcont.getActiveTest());
+		
+		
+		return "Teacher";
+	}
+	
+	@RequestMapping(value = {"/sendTest"}, method = RequestMethod.GET)
+	public String currentTestOptions(Model model) {
+		
+		model.addAttribute("Test", new Test());
+		model.addAttribute("tests", testcont.showAllTests());
+		model.addAttribute("currentTest", testcont.getActiveTest());
+		
+		
+		return "Teacher";
+	}
 
 	
-	@Autowired
-	//@RequestMapping(value = "/currentTestOptions", method = RequestMethod.GET)
-	@GetMapping("Teacher")
-	public ModelAndView currentTestOptions(/*Model model*/) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("Teacher");
-		mav.addObject("test", new Test());
-		mav.addObject("tests", testcont.showAllTests());
+	@RequestMapping(value = {"/sendTest"}, method = RequestMethod.POST, params="action=Send")
+	public String sendTest(@Valid @ModelAttribute("test") Test test, BindingResult bindingResult, Model model){
 		
 		
-		/*Test test = new Test();
-		model.addAttribute("test", test);
+		for(Test i : testcont.showAllTests()){
+			if(i.getName().equals(test.getName())) {
+				testcont.SetActiveTest(i);
+				model.addAttribute("currentTest", testcont.getActiveTest());
+			}
+		}
 		
-		List<Test> tests = testcont.showAllTests();
-		model.addAttribute("tests", tests);
-		
-		return "currentTestOptions";*/
-		
-		return mav;
-		
+		return "sendTest";
 	}
+	
+	@RequestMapping(value = {"/sendTest"}, method = RequestMethod.POST, params="action=Clear")
+	public String clearTest(Model model){
+		
+		testcont.SetActiveTest(null);
+		
+		model.addAttribute("Test", new Test());
+		model.addAttribute("tests", testcont.showAllTests());
+		model.addAttribute("currentTest", testcont.getActiveTest());
+		
+		
+		return "Teacher";
+
+	}
+	
+	//***********Test Results************
+	
+	@RequestMapping(value = {"/TestResults"}, method = RequestMethod.GET)
+	public String testResultsData(@Valid @ModelAttribute("test") Test test, BindingResult bindingResult, Model model){
+		
+		model.addAttribute("Students", testcont.showAllStudents());
+		
+		return "TestResults";
+
+	}
+	
+	@RequestMapping(value = {"/sendTest"}, method = RequestMethod.POST, params="action=Results")
+	public String testResults(@Valid @ModelAttribute("test") Test test, BindingResult bindingResult, Model model){
+		
+		List<Student> students = testcont.findStudentsByTest(test);
+		for (Student i : students){
+			System.out.println(i);
+		}
+		model.addAttribute("students", students);
+		
+		return "TestResults";
+
+	}
+	
 	
 }
 
@@ -64,3 +123,28 @@ public class TeacherController {
 // AND THIS
 // https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#model-attributes
 // 7.5 and 5.4 points. Get tutorial version working, change to our case.
+
+
+
+
+/*
+@RequestMapping(value = {"/sendTest"}, method = RequestMethod.GET)
+public String currentTestOptions(Model model) {
+	
+	model.addAttribute("Test", new Test());
+	model.addAttribute("tests", testcont.showAllTests());
+	model.addAttribute("currentTest", testcont.getActiveTest());
+	
+	
+	return "sendTest";
+}
+
+@RequestMapping(value = {"/sendTest"}, method = RequestMethod.POST)
+public String sendTest(@Valid @ModelAttribute("test") Test test, BindingResult bindingResult){
+	
+	testcont.SetActiveTest(test);
+	
+	
+	return "sendTest";
+} */
+
