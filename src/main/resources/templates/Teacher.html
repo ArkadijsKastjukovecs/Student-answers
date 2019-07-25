@@ -6,19 +6,24 @@
 </head>
 <body>
 	<p>
-		<a href='/Teacher/NewTest'>New Test upload</a> <a href='/Teacher/TestResults'>See Test Results</a>
+		<a href='/NewTest'>New Test upload</a>
 	</p>
 	
-	<form id="dropdown" th:action="@{/sendTest}" method='post'>
+	<div>
+		<form th:action="@{/sendTest}" th:object="${Test}"  method="post">
+		<label for="name" id="name" >Name</label>
+		<input type="text" id="name" name="name"/>
+		
+		<input type="submit" name="action" value="Send"/>
+		<input type="submit" name="action" value="Clear"/>
+		<input type="submit" name="action" value="Results"/></form>
+		<br>
+	</div>
 	
-		<label>Select test</label> <select th:field="*{test}">
-			<option th:each="test : ${tests}" th:value="${test.getName()}"
-				th:text="${test.getName()}"></option>
-		</select> <input type='submit' value='Submit'>
-	</form>
+	
 	
 	<a> Current test for students: </a>
-	<p th:text="${activeTest}" ></p>
+	<p th:text="${currentTest}" ></p>
 	<div>
 	<a>Available tests for students:</a>
 	<th:block th:each="test : ${tests}">
