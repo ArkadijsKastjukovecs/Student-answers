@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import project.answers.Server;
 import project.answers.customExceptions.MultiFileNameException;
 import project.answers.customExceptions.MultiStudentNameException;
 import project.answers.customExceptions.MultiTestNameException;
@@ -45,6 +46,7 @@ public class TestController {
 
 	public void SetActiveTest(Test test) {
 		active = test;
+		Server.frame.changeActiveTest(test);
 	}
 
 	public Test getActiveTest() {

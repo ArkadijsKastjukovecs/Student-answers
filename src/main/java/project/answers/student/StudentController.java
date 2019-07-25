@@ -87,7 +87,9 @@ public class StudentController {
 			 file = Server.testController.getTest(request.getParameter("testName")).getFile();
 		}else{
 			file = Server.testController.getActiveTest().getFile();
+			
 		}
+		System.out.println(Server.testController.getActiveTest());
 		if(file != null){
 			
 		try{

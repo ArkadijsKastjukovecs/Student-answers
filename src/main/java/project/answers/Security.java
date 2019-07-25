@@ -17,10 +17,10 @@ public class Security extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/student","/student/excelFile").permitAll()
+                .antMatchers("/", "/student","/student/excelFile", "/student/buttonSubmit").permitAll()
                 .anyRequest()
-                .permitAll()
-//                .authenticated()
+//                .permitAll()
+                .authenticated()
                 .and().csrf().disable()
             .formLogin()
                 .loginPage("/login")
