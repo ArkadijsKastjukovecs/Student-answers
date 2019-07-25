@@ -76,9 +76,13 @@ public class TeacherController {
 	}
 	
 	@RequestMapping(value = {"/sendTest"}, method = RequestMethod.POST, params="action=Clear")
-	public String clearTest(){
+	public String clearTest(Model model){
 		
 		testcont.SetActiveTest(null);
+		
+		model.addAttribute("Test", new Test());
+		model.addAttribute("tests", testcont.showAllTests());
+		model.addAttribute("currentTest", testcont.getActiveTest());
 		
 		
 		return "Teacher";
