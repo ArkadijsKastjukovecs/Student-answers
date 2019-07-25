@@ -161,14 +161,17 @@ public class StudentController {
 	public static int getAnswers(String one, String two, String vards) throws MultiStudentNameException{
 		
 		int localScore = 0;
-		if(one.equals(test.getAnswer1())){
-			
-			localScore++;
-		}
-		if(two.equals(test.getAnswer2())){
-			
-			localScore++;
-		}
+//		if(one.equals(test.getAnswer1())){
+//			Server.testController.compareResoults(one, test.getAnswer1());
+//			localScore++;
+//		}
+//		if(two.equals(test.getAnswer2())){
+//			
+//			localScore++;
+//		}
+		
+		localScore += Server.testController.compareResoults(one, test.getAnswer1());
+		localScore += Server.testController.compareResoults(two, test.getAnswer2());
 		Student student = new Student(vards, test.getName(), localScore, one, two);
 		System.out.println(student.toString());
 		Server.testController.AddStudent(student);

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,16 +33,16 @@ public class TestController {
 		if (instance == null) {
 			instance = new TestController();
 			File directory = new File("./tests");
-	        if (!directory.exists() && !directory.mkdirs()) {
-	        	System.err.println("Map wasn't created");
-	        }
+			if (!directory.exists() && !directory.mkdirs()) {
+				System.err.println("Map wasn't created");
+			}
 		}
 		return instance;
 
 	}
-	
-	public Student deleteLastStudent(){
-		return students.remove(students.size()-1);
+
+	public Student deleteLastStudent() {
+		return students.remove(students.size() - 1);
 	}
 
 	public void SetActiveTest(Test test) {
@@ -57,25 +58,24 @@ public class TestController {
 	public List<Test> showAllTests() {
 		return tests;
 	}
-	
-	public List<Student> findStudentsByTest(Test test){
-		List<Student>studentsInTest = new ArrayList<>();
-		for (Student std:showAllStudents())
+
+	public List<Student> findStudentsByTest(Test test) {
+		List<Student> studentsInTest = new ArrayList<>();
+		for (Student std : showAllStudents())
 			if (test.getName().equalsIgnoreCase(std.getFileName()))
 				studentsInTest.add(std);
 		return studentsInTest;
 	}
-	
-	public List<Student> findStudentsByTest(String test){
+
+	public List<Student> findStudentsByTest(String test) {
 		List<Student> studentInTest = new ArrayList<>();
-		for (Student std:showAllStudents())
+		for (Student std : showAllStudents())
 			if (test.equalsIgnoreCase(std.getFileName()))
 				studentInTest.add(std);
 		return studentInTest;
-				
+
 	}
-	
-	
+
 	public List<Student> showAllStudents() {
 		return students;
 	}
@@ -100,6 +100,23 @@ public class TestController {
 				return null;
 		}
 		return student;
+	}
+
+	public int compareResoults(String studentAnswer, String testAnswerString) {
+		String[] studList = studentAnswer.split("@");
+		String[] testList = testAnswerString.split("@");
+		int count = 0;
+		System.out.println(studList);
+		try {
+			for (int i = 0; i < studList.length; i++) {
+				System.out.println(studList[i]);
+				if (studList[i].trim().equalsIgnoreCase(testList[i].trim()))
+					count++;
+			}
+		} catch (Exception e) {
+		}
+
+		return count;
 	}
 
 	public void addTest(Test test) throws MultiFileNameException, MultiTestNameException {
@@ -127,8 +144,7 @@ public class TestController {
 
 	@SuppressWarnings("unchecked")
 	public void loadTests() {
-		try (ObjectInputStream ois = 
-				new ObjectInputStream(new FileInputStream("list"))) {
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("list"))) {
 			tests = (List<Test>) ois.readObject();
 			students = (List<Student>) ois.readObject();
 		} catch (Exception e) {
@@ -137,8 +153,7 @@ public class TestController {
 	}
 
 	public void saveTests() {
-		try (ObjectOutputStream oos = 
-				new ObjectOutputStream(new FileOutputStream("list"))) {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("list"))) {
 			oos.writeObject(tests);
 			oos.writeObject(students);
 		} catch (Exception e) {
@@ -146,8 +161,10 @@ public class TestController {
 		}
 	}
 
-	public static void main(String[] args) throws MultiFileNameException, MultiTestNameException, MultiStudentNameException {
+	public static void main(String[] args)
+			throws MultiFileNameException, MultiTestNameException, MultiStudentNameException {
 		TestController tc = TestController.getInstance();
+		System.out.println(tc.compareResoults("Hello             @DSADA@dsadsada", "Hello@                 dsada@@"));
 	}
 
 }
