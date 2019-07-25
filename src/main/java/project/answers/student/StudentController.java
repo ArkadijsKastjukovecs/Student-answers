@@ -22,6 +22,7 @@ public class StudentController {
 	private static Test test = null;
 	private static File file;
 	private boolean downloadedTest = true;
+	private int switchCase = 1;
 //	protected Connection conn;
 	/*conn = null;
 		try {
@@ -117,25 +118,40 @@ public class StudentController {
 	
 	@RequestMapping(value = "/student/buttonSubmit", method = RequestMethod.POST)
 	public String buttonSubmit(HttpServletRequest request, Model model) {
+		switchCase = 1;
 //		System.out.println(request.getParameter("answer1")+" "+ request.getParameter("answer2"));
-//		model.addAttribute("testNull", test);
+		
 		int localScore = 0;
-		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "" && request.getParameter("vards") != "") {
-			try {
-				downloadedTest = true;
+		try {
+		if(test.getName() == null){
+			switchCase = 3;
+			model.addAttribute("testNull", String.valueOf(switchCase));
+		}
+		
+		System.out.println(test.getName());
+		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "" &&
+				request.getParameter("vards") != "" && test.getName() != null) {
+	//			downloadedTest = true;
 				localScore = StudentController.getAnswers(request.getParameter("answer1"), 
 				request.getParameter("answer2"), request.getParameter("vards"));
 				System.out.println(String.valueOf(downloadedTest));
 			} 
+		}
 			catch(NullPointerException e){
-				downloadedTest = false;
+				switchCase = 2;
+				model.addAttribute("testNull", String.valueOf(switchCase));
+	//			downloadedTest = false;
 			}
 			catch (MultiStudentNameException e) {
+	//			model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
+				
+				model.addAttribute("testNull", String.valueOf(switchCase));
 				model.addAttribute("localScore", "Sis students ar tadu vardu jau pildija so testu");
+				return "StudentScore";
 				}
-		}
 		
-		model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
+		model.addAttribute("testNull", String.valueOf(switchCase));
+//		model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
 		model.addAttribute("localScore", String.valueOf(localScore));
 		return "StudentScore";
 	}

@@ -7,18 +7,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<div th:if="${downloadedTest} == 'true'">
+    	<div th:if="${testNull} == '3'">
+    		<p><font size=+2>Sada testa neeksiste.<br>
+    		Pameginiet velreiz</font></p>
+    		<a href='/student'><font size=+1 color=red><b>Back</b></font></a>
+   		</div>
+    	<div th:if="${testNull} == '1'">
 
     		<p>Jusu atzime ir: </p>
     		<hr>
     		<p th:text="${localScore}"></p>
-	    	</div> 
-    	<div th:if="${downloadedTest} == 'false'">
-    		<p><font size=+2>Pirms sakt aizpildit laukus, lejupielade testu, ludzu</font></p>
+    		<a href='/student'><font size=+1 color=red><b>Back</b></font></a>
+	    </div> 
+    	<div th:if="${testNull} == '2'">
+    		<p><font size=+2>Pirms sakt aizpildit laukus, lejupieladiet testu, ludzu</font></p>
+    		<a href='/student'><font size=+1 color=red><b>Back</b></font></a>
    		</div>
-    <div th:if="${testNull} == 'null'">
-    	<p><font size=+2>Sada testa neeksiste.<br>
-    	Pameginiet velreiz</font></p>
-    </div>
     </body>
 </html>

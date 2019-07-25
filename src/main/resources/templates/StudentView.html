@@ -14,12 +14,12 @@
         <div th:if="${isActive} == null">
         	<form action="/student/excelFile" method="post">
         	<input type=text name=testName>
-        	<button type=submit formtarget='_blank'>Lejupieladet</button>
+        	<button type=submit formtarget='_self'>Lejupieladet</button>
         	</form>
         </div>
         <div th:unless="${isActive} == null">
         	<form action="/student/excelFile" method="post">
-        	<a href='/student/excelFile' target='_blank'>  Excel File</a>
+        	<a href='/student/excelFile' target='_self'>  Excel File</a>
         	</form>
         </div>
         <hr>
@@ -28,7 +28,7 @@
         	Ievadiet, ludzu, atbildi uz pirmo jautajumu:<br><input type=text name=answer1 placeholder= "Pirma atbilde"><br>
         	Ievadiet, ludzu, atbildi uz otro jautajumu:<br><input type=text name=answer2 placeholder= "Otra atbilde"><br>
         	<br>
-        	<button type=submit formtarget='_blank'>Apstiprinat</button></form><br/>
+        	<button type=submit formtarget='_self'>Apstiprinat</button></form><br/>
         </div>
         
     </body>
