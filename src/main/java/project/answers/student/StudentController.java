@@ -79,7 +79,7 @@ public class StudentController {
 		return "StudentView";
 	}
 
-	@RequestMapping(value = "/student/excelFile", method = RequestMethod.POST)
+	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
 	public String excelFile(HttpServletRequest request, HttpServletResponse response, Model model){
 		response.setContentType("application/*");
 		test = Server.testController.getTest(request.getParameter("testName"));
