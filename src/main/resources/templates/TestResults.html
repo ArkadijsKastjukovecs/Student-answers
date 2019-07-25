@@ -6,20 +6,28 @@
 <title>Test Results</title>
 </head>
 <body>
-	<p><a href='/Teacher'>Back</a></p>
 	
 	<p>
-	<p th:text="${test.getName()}" th:text="${test.getFile().getName()}"></p>
-	<th:block th:each="student : ${students}">
-		<tr>
-			<td th:text="${student}">...</td>
-		</tr>
-		<br>
+	<p>
+	<a>Results for test: </a> <a th:text="${test.name}"></a> <a th:text="${filename}"></a><br>
+	<a>Correct answers: </a> <a th:text="${ans1}"></a> <a> And </a> <a th:text="${ans2}"></a>
 	
 	</p>
 	
-	<p th:text="${students}" ></p>
-	
-	
+	<div style='height:400px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;'>
+	<th:block th:each="student : ${students}">
+		<tr>
+			<td th:text="${student.getStudName()}"></td>
+			<td th:text="${student.getScore()}"></td>
+			<td>Answers: </td>
+			<td th:text="${student.getAns1()}"></td>
+			<td th:text="${student.getAns2()}"></td>
+		</tr>
+		<br>
+	</div>
+
+	<br>
+
+	<p><a href='/Teacher'>Back</a></p>
 </body>
 </html>

@@ -108,7 +108,14 @@ public class TeacherController {
 			System.out.println(i);
 		}
 		model.addAttribute("students", students);
-		model.addAttribute("test", test);
+		
+		for (Test retrievetest : testcont.showAllTests()){
+			if(retrievetest.getName().equals(test.getName())){
+				model.addAttribute("filename", retrievetest.getFile().getName());
+				model.addAttribute("ans1", retrievetest.getAnswer1());
+				model.addAttribute("ans2", retrievetest.getAnswer2());
+			}
+		}
 		
 		return "TestResults";
 
@@ -124,28 +131,4 @@ public class TeacherController {
 // AND THIS
 // https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#model-attributes
 // 7.5 and 5.4 points. Get tutorial version working, change to our case.
-
-
-
-
-/*
-@RequestMapping(value = {"/sendTest"}, method = RequestMethod.GET)
-public String currentTestOptions(Model model) {
-	
-	model.addAttribute("Test", new Test());
-	model.addAttribute("tests", testcont.showAllTests());
-	model.addAttribute("currentTest", testcont.getActiveTest());
-	
-	
-	return "sendTest";
-}
-
-@RequestMapping(value = {"/sendTest"}, method = RequestMethod.POST)
-public String sendTest(@Valid @ModelAttribute("test") Test test, BindingResult bindingResult){
-	
-	testcont.SetActiveTest(test);
-	
-	
-	return "sendTest";
-} */
 
