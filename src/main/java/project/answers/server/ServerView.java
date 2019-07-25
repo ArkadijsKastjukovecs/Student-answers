@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import project.answers.student.StudentView;
+//import project.answers.student.StudentView;
 
 @RestController
 @RequestMapping(value = "", produces = "text/html;charset=UTF-8")
 public class ServerView {
 	
-	 StudentView student = new StudentView();
+//	 StudentView student = new StudentView();
 
 	@GetMapping("/")
 	@ResponseBody
