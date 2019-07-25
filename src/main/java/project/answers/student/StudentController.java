@@ -19,20 +19,15 @@ import project.answers.tests.Test;
 
 @Controller
 public class StudentController {
-	private static Test test = Server.testController.getTest("test1");
-//	private static Test test;
+	private static Test test = null;
 	private static File file;
 	private int switchCase = 1;
 	
-	static{
-		Server.testController.SetActiveTest(test);
-	}
 	
 	@RequestMapping(value = "/student", produces = "text/html;charset=UTF-8", method = RequestMethod.GET)
 	public String helloWorld(HttpServletRequest request, HttpServletResponse response, Model model){
 		
 		
-	//	System.out.println(Server.testController.getActiveTest());
 		model.addAttribute("isActive", Server.testController.getActiveTest());
 		return "StudentView";
 	}
@@ -40,11 +35,12 @@ public class StudentController {
 	@RequestMapping(value = "/student/excelFile", method = RequestMethod.GET)
 	public String excelFile(HttpServletRequest request, HttpServletResponse response, Model model){
 		response.setContentType("application/*");
-		test = Server.testController.getTest(request.getParameter("testName"));
 		if(StudentController.activeTest()){
 			 file = Server.testController.getTest(request.getParameter("testName")).getFile();
+			 test = Server.testController.getTest(request.getParameter("testName"));
 		}else{
 			file = Server.testController.getActiveTest().getFile();
+			test = Server.testController.getActiveTest();
 		}
 		if(file != null){
 			
