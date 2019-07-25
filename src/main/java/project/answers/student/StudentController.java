@@ -169,7 +169,7 @@ public class StudentController {
 			
 			localScore++;
 		}
-		Student student = new Student(vards, test.getName(), localScore);
+		Student student = new Student(vards, test.getName(), localScore, one, two);
 		System.out.println(student.toString());
 		Server.testController.AddStudent(student);
 		return student.getScore();

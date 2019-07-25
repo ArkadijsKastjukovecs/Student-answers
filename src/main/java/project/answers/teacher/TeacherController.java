@@ -108,7 +108,14 @@ public class TeacherController {
 			System.out.println(i);
 		}
 		model.addAttribute("students", students);
-		model.addAttribute("test", test);
+		
+		for (Test retrievetest : testcont.showAllTests()){
+			if(retrievetest.getName().equals(test.getName())){
+				model.addAttribute("filename", retrievetest.getFile().getName());
+				model.addAttribute("ans1", retrievetest.getAnswer1());
+				model.addAttribute("ans2", retrievetest.getAnswer2());
+			}
+		}
 		
 		return "TestResults";
 
