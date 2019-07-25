@@ -19,18 +19,21 @@ import project.answers.tests.Test;
 
 @Controller
 public class StudentController {
-//	private static Test test = Server.testController.getTest("test1");
-	private static Test test;
+	private static Test test = Server.testController.getTest("test1");
+//	private static Test test;
 	private static File file;
 	private int switchCase = 1;
+	
+	static{
+		Server.testController.SetActiveTest(test);
+	}
 	
 	@RequestMapping(value = "/student", produces = "text/html;charset=UTF-8", method = RequestMethod.GET)
 	public String helloWorld(HttpServletRequest request, HttpServletResponse response, Model model){
 		
-	//	Server.testController.SetActiveTest(test);
+		
 	//	System.out.println(Server.testController.getActiveTest());
 		model.addAttribute("isActive", Server.testController.getActiveTest());
-	//	System.out.println("Te ir");
 		return "StudentView";
 	}
 
@@ -75,7 +78,6 @@ public class StudentController {
 	@RequestMapping(value = "/student/buttonSubmit", method = RequestMethod.POST)
 	public String buttonSubmit(HttpServletRequest request, Model model) {
 		switchCase = 1;
-//		System.out.println(request.getParameter("answer1")+" "+ request.getParameter("answer2"));
 		
 		int localScore = 0;
 		try {
@@ -87,27 +89,23 @@ public class StudentController {
 		System.out.println(test.getName());
 		if (request.getParameter("answer1") != "" && request.getParameter("answer2") != "" &&
 				request.getParameter("vards") != "" && test.getName() != null) {
-	//			downloadedTest = true;
 				localScore = StudentController.getAnswers(request.getParameter("answer1"), 
 				request.getParameter("answer2"), request.getParameter("vards"));
+				model.addAttribute("testNull", String.valueOf(switchCase));
+				model.addAttribute("localScore", String.valueOf(localScore));
 			} 
 		}
 			catch(NullPointerException e){
 				switchCase = 2;
 				model.addAttribute("testNull", String.valueOf(switchCase));
-	//			downloadedTest = false;
 			}
 			catch (MultiStudentNameException e) {
-	//			model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
 				
 				model.addAttribute("testNull", String.valueOf(switchCase));
 				model.addAttribute("localScore", "Sis students ar tadu vardu jau pildija so testu");
 				return "StudentScore";
 				}
 		
-		model.addAttribute("testNull", String.valueOf(switchCase));
-//		model.addAttribute("downloadedTest", String.valueOf(downloadedTest));
-		model.addAttribute("localScore", String.valueOf(localScore));
 		return "StudentScore";
 	}
 	
