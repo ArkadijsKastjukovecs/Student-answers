@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<style>hr { display: block;margin-top: 0.5em;margin-bottom: 0.5em;margin-left: auto;margin-right: auto;border-style: inset;border-width: 1px;}</style>
+    <head>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+        <title>Priekš studentiem</title>
+        <meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div class="all-container">
+        <h1>Studenta mājas lapa</h1>
+        <br>
+        
+        
+        <p><font size=+2>Lejupielādiet failu</font></p>
+        <div th:if="${isActive} == null">
+        	<form action="/student/excelFile" method="get">
+        	<input type=text name=testName>
+        	<button type=submit formtarget='_self'>Lejupielādet</button>
+        	</form>
+        </div>
+        <div th:unless="${isActive} == null">
+        	<form action="/student/excelFile" method="get">
+        	<a href='/student/excelFile' target='_self'>  Excel File</a>
+        	</form>
+        </div>
+        <hr>
+        <div>
+        	<form action='/student/buttonSubmit' method="post">Jusu vards<br><input type=text name=vards placeholder= "Vards.Uzvards"><br>
+        	Ievadiet, lūdzu, atbildi uz pirmo jautājumu:<br><input type=text name=answer1 placeholder= "Pirma atbilde"><br>
+        	Ievadiet, lūdzu, atbildi uz otro jautājumu:<br><input type=text name=answer2 placeholder= "Otra atbilde"><br>
+        	<br>
+        	<button type=submit formtarget='_self'>Apstiprināt</button></form><br/>
+        </div>
+        <a href='/'><font size=+1 color=red><b>Back</b></font></a>
+        </div>
+    </body>
+</html>

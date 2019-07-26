@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	<title>Teacher homepage</title>
+</head>
+<body>
+<div class="all-container">
+	<p>
+		<a href='/addTest'>Izveidot jaunu testu</a>
+	</p>
+	
+	<div>
+		<form th:action="@{/sendTest}" th:object="${Test}"  method="post">
+		<label for="name" id="name" >Name</label>
+		<input type="text" id="name" name="name"/>
+		
+		<input type="submit" name="action" value="Send"/>
+		<input type="submit" name="action" value="Clear"/>
+		<input type="submit" name="action" value="Results"/></form>
+		<br>
+	</div>
+	
+	
+	
+	<a> Current test for students: </a>
+	<p th:text="${currentTest}" ></p>
+	<a>Available tests for students:</a>
+	<div style='height:400px;width:400px;margin:auto;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;'>
+	<th:block th:each="test : ${tests}">
+		<tr>
+			<td th:text="${test.getName()}"></td>
+		</tr>
+		<br>
+	</div>
+	
+	<p><a href='/'>Back</a></p>
+	</div>
+</body>
+</html>

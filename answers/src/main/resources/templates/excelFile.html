@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<style>hr { display: block;margin-top: 0.5em;margin-bottom: 0.5em;margin-left: auto;margin-right: auto;border-style: inset;border-width: 1px;}</style>
+    <head>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+        <title>Prieks studentiem</title>
+        <meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div class="all-container">
+    	<div th:if="${IOException} == 'Success'">
+    		<p>Sucess</p>
+    		<a href='/student'><font size=+1 color=red><b>Back</b></font></a>
+    	</div>
+    	<div th:if="${IOException} == 'Fail'">
+    		<p>Sads tests neeksiste</p>
+    		<a href='/student'><font size=+1 color=red><b>Back</b></font></a>
+    	</div>
+    	</div>
+    </body>
+</html>

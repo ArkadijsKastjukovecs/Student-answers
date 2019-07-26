@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<p>
+		<a href='/Teacher/NewTest'>New Test upload</a>
+	</p>
+	<div
+		style='height: 150px; width: 400px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;'>
+		<form th:action='${sendTest}' th:object="${tests}" method='post'>
+			<fieldset>
+				<label>Select test</label> 
+				<select th:field="*{tests}">
+					<option 
+					th:each="test : ${tests}"
+					th:value="${test}"
+					th:text="${test.getName}"
+					
+					></option>
+				</select>
+			</fieldset>
+			<input type='submit' value='Submit'>
+		</form>
+	</div>
+	<form action='${resetCurrentTest}' method='post'>
+		<input type='submit' value='Clear'>
+	</form>
+	<a> Current Test for students: </a>
+	<p th:text="${activeTest}" ></p>
+	<p>All available tests on server:</p>
+	<div
+		style='height: 200px; width: 400px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;'>
+		<th:block th:each="test : ${tests}">
+	</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher</title>
+</head>
+<body>
+	<div class="all-container">
+	<div>
+		<h1>Pievienot jaunu testu</h1>
+	</div>
+	
+	<div>
+		<form action="/addTest" th:object="${Test}"  method="post"  enctype="multipart/form-data">
+		
+		<label for="file1" >Izvēlēties failu</label>
+		<input type="file"  name="file1" autofocus="autofocus"/>
+		<br>
+		<label for="name" id="name" >Testa nosaukums</label>
+		<input type="text" id="name" name="name"/>
+		<br>
+		<label for="answer1" id="answer1" >Pirmā atbilde</label>
+		<input type="text" id="answer1" name="answer1"/>
+		<br>
+		<label for="answer2" id="answer2" >Otrā atbilde</label>
+		<input type="text" id="answer2" name="answer2"/>
+		<br>
+		<input type="submit" value="Click"/></form>
+	</div>
+	<p><a href='/Teacher'>Back</a></p>
+	</div>
+</body>
+</html>
